@@ -1,0 +1,1 @@
+export const BUSY_INDICATOR_EVENT = 'isLoading'

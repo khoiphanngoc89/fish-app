@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPD:UNIT xmlns:XPD="http://www.staruml.com" version="1">
+<XPD:HEADER>
+<XPD:SUBUNITS>
+</XPD:SUBUNITS>
+</XPD:HEADER>
+<XPD:BODY>
+<XPD:OBJ name="DocumentElement" type="UMLPackage" guid="n2ajDQmhwk60zVGikqpOLAAA">
+<XPD:ATTR name="Name" type="string">Interfaces</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">9</XPD:ATTR>
+<XPD:OBJ name="OwnedElements[0]" type="UMLInterface" guid="2Oc6A3gR3EGci7o2l3jRtgAA">
+<XPD:ATTR name="Name" type="string">IProductCategoryRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">eWRnPef24k2wLTqowTDQIAAA</XPD:REF>
+<XPD:REF name="Views[1]">bySAltfVTkiXnxMTTMEbDgAA</XPD:REF>
+<XPD:REF name="Views[2]">NhgVtT/kekO2MB6F906EAQAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">xLpWI5IKrkK9kZB5lZZYrwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[1]" type="UMLInterface" guid="4vShHcjjH0+Lni+VD+uRngAA">
+<XPD:ATTR name="Name" type="string">IProductRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">WN/Gg1pCqUWaHB3AwDoJTgAA</XPD:REF>
+<XPD:REF name="Views[1]">rDYIfqmKuk2WvGASYd9NYQAA</XPD:REF>
+<XPD:REF name="Views[2]">vF5HRvXiFUOq0FMgUpFh+AAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">6rlmnz/dtUmV6+ag2EFAmQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[2]" type="UMLInterface" guid="3Im+NL3yEEq9BJ6VPtm2qQAA">
+<XPD:ATTR name="Name" type="string">IBillRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">6Xxl3p7brE2ztsvS68b2iwAA</XPD:REF>
+<XPD:REF name="Views[1]">MZh3QnWU9EeCQvOAu4n2OAAA</XPD:REF>
+<XPD:REF name="Views[2]">8oVayGaE10O805lLPe9RyQAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">pxEilnzniUGTr6+fjZAPnAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[3]" type="UMLInterface" guid="w88nnni6MEGME24Jx2ma0gAA">
+<XPD:ATTR name="Name" type="string">IMemberRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">ZBjTqmoTF069JeIRzbBYdgAA</XPD:REF>
+<XPD:REF name="Views[1]">JruSMp20TEi+3WtcXt2GiwAA</XPD:REF>
+<XPD:REF name="Views[2]">2Ss90sTSyEWj2KrGqs7b+gAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">f8a2O2dcLkWph1zhxa8CqgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[4]" type="UMLInterface" guid="sE5fuJoPiUS8MpiJ+8gNyQAA">
+<XPD:ATTR name="Name" type="string">IBillDetailRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">aszhojZHi0qyf7DXfCMJQwAA</XPD:REF>
+<XPD:REF name="Views[1]">xcW+/aORc0KPqhb5tCgrfAAA</XPD:REF>
+<XPD:REF name="Views[2]">jK38JTIwTUWLEiOr+OVz1wAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">fT1LfxIqdEOizaH8VxfGRgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[5]" type="UMLInterface" guid="b+83hILPk0aG4vBWfKarNgAA">
+<XPD:ATTR name="Name" type="string">IRoleRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">+RD5l3in6kC5YMd23lEtUwAA</XPD:REF>
+<XPD:REF name="Views[1]">1wxrDNxoOEyZX6XGiVIIrgAA</XPD:REF>
+<XPD:REF name="Views[2]">LRgEiTLoxkax/JQdtgucLQAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">PxshYcQ3tUKKr0PEBeijywAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[6]" type="UMLInterface" guid="qWtHIxQuNECWE0kk4/nPowAA">
+<XPD:ATTR name="Name" type="string">IMenuRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">+776hIUkCku36SkiloM+SAAA</XPD:REF>
+<XPD:REF name="Views[1]">Y4+TVexNbU2NAJWKWDkgogAA</XPD:REF>
+<XPD:REF name="Views[2]">AuEUeBj5YEG6s1RJc9sqAQAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">8Y5N44HH70ms7KEcBtx+vAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[7]" type="UMLInterface" guid="Yl2948IDQ0GVj5ZQvEENWwAA">
+<XPD:ATTR name="Name" type="string">ISubMenuRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[8]" type="UMLInterface" guid="iQoh98NIg02TE4JsPAolTQAA">
+<XPD:ATTR name="Name" type="string">IFooterRepository</XPD:ATTR>
+<XPD:REF name="Namespace">n2ajDQmhwk60zVGikqpOLAAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">iSyvxC1xaEaCwQDWcmEmowAA</XPD:REF>
+<XPD:REF name="Views[1]">DjOJNZZhO0OyzYZDWWNyZQAA</XPD:REF>
+<XPD:REF name="Views[2]">I72Aw86JhECOcIdHz9G0IAAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]" pathname="::Implementation Model::NFC.Repositories::">OobnquQksUO//FmqpWAXawAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:BODY>
+</XPD:UNIT>

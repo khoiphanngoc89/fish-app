@@ -1,0 +1,5 @@
+USE FISH
+GO
+
+ALTER TABLE [Reference.Roles]
+ADD [IsActive] BIT NOT NULL DEFAULT 1
