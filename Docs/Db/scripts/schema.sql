@@ -30,7 +30,7 @@ CREATE TABLE [Product](
 	[Description] NVARCHAR(255) NULL,
 	[Quality] INT NULL DEFAULT 0,
 	[IsActive] BIT NULL,
-	[Price] DECIMAL(10,2) NULL,
+	[Price] FLOAT(53) NOT NULL,
 	[PromotionPrice] DECIMAL(10,2) NULL,
 	[SeoPageTitle] VARCHAR(255) NULL,
 	[SeoAlias] VARCHAR(150) NULL,
@@ -96,7 +96,7 @@ CREATE TABLE [Bill] (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[BillNumber] UNIQUEIDENTIFIER NOT NULL DEFAULT(NEWID()),
 	[MemberId] BIGINT NOT NULL,
-	[Total] DECIMAL(10,2) NOT NULL,
+	[Total] FLOAT(53) NOT NULL,
 	[CreationDate] DATETIME2(7) NOT NULL,
 	[ModificationDate] DATETIME2(7) NOT NULL,
 	CONSTRAINT [PK_Bill] PRIMARY KEY ([Id])
