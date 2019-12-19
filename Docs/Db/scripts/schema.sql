@@ -116,6 +116,7 @@ CREATE TABLE [BillDetail] (
 	[Id] BIGINT NOT NULL,
 	[ProductId] BIGINT NOT NULL,
 	[Quality] INT NOT NULL DEFAULT 0,
+	[Price] FLOAT(53) NOT NULL,
 	[IsReturn] BIT NULL DEFAULT 0 ,
 	[CreationDate] DATETIME2(7) NOT NULL,
 	[ModificationDate] DATETIME2(7) NOT NULL,
