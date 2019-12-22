@@ -52,7 +52,7 @@ GO
 
 CREATE TABLE [Role](
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
-	[Name] NVARCHAR(50) NOT NULL,
+	[Name] NVARCHAR(50) NULL,
 	[Description] NVARCHAR(255) NULL,
 	[IsActive] BIT DEFAULT 1,
 	[CreationDate] DATETIME2(7) NOT NULL,
@@ -168,4 +168,3 @@ ALTER TABLE [SubMenu] ADD CONSTRAINT [DF_SubMenu_ModificationDate] DEFAULT (sysd
 GO
 ALTER TABLE [SubMenu] ADD CONSTRAINT [FK_SubMenu_Menu] FOREIGN KEY ([ParentId]) REFERENCES [Menu]([Id])
 GO
-
