@@ -6,7 +6,7 @@ import axios from 'axios';
 const baseURL = process.env.VUE_APP_BASE_URL;
 
 const instance = axios.create({
-  baseURL: baseURL,
+  baseURL: `${baseURL}api`,
   withCredentials: false,
 })
 
