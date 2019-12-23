@@ -565,17 +565,11 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="parmas">The parmas.</param>
         private void BuildParmas(DynamicParameters dp, IDictionary<string, object> parmas)
         {
+            
             foreach (var item in parmas)
             {
-                if(!item.Key.Contains("@"))
-                {
-                    dp.Add($"@{item.Key}", item.Value);
-                }
-                else
-                {
-                    dp.Add($"{item.Key}", item.Value);
-                }
-                
+                var key = !item.Key.Contains("@") ? $"@{item.Key}" : item.Key;
+                dp.Add(key, item.Value);
             }
         }
 
