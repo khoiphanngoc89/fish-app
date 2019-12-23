@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using NFC.Domain.Entities;
 using NFC.Persistence.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace NFC.Persistence
 {
@@ -12,7 +10,16 @@ namespace NFC.Persistence
         public MappingProfile()
         {
             CreateMap<ProductDTO, Product>().ReverseMap();
-            CreateMap<MenuDTO, Menu>().ReverseMap();
+            CreateMap<Menu, MenuDTO>()
+                .ForMember(dest => dest.SubMenus, opts => opts.MapFrom(src => src.SubMenus.Select(n => new SubMenuDTO
+                {
+                    Id = n.Id,
+                    Name = n.Name,
+                    Description = n.Description,
+                    IsActive = n.IsActive,
+                    ParentId = n.ParentId,
+                    Url = n.Url
+                })));
         }
     }
 }

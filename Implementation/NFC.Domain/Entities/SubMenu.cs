@@ -48,13 +48,5 @@ namespace NFC.Domain.Entities
         /// </value>
         public bool IsActive { get; set; }
 
-        /// <summary>
-        /// Gets or sets the menu.
-        /// </summary>
-        /// <value>
-        /// The menu.
-        /// </value>
-        public virtual Menu Menu { get; set; }
-
     }
 }
