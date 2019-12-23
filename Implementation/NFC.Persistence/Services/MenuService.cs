@@ -8,7 +8,12 @@ using System.Linq;
 
 namespace NFC.Persistence.Services
 {
-    public class MenuService : ServiceBase, IService<int, MenuDTO>
+    public interface IMenuService : IService<int, MenuDTO>
+    {
+
+    }
+
+    public class MenuService : ServiceBase, IMenuService
     {
         private readonly IMenuRepository menuRepository;
 

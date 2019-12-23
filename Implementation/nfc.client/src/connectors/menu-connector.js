@@ -2,6 +2,7 @@ import Connector from './connector-base.js';
 const endpoint = '/menu'
 export default {
     async getAllAsync() {
+        debugger
         return await Connector.get(`${endpoint}/all`)
     },
     async getByIdAsync(id) {

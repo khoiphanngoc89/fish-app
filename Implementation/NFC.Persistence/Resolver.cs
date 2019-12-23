@@ -15,9 +15,8 @@ namespace NFC.Persistence
         /// <exception cref="NotImplementedException"></exception>
         public void OnInitialize(IDependencyRegister register)
         {
-            
             register.AddTransient<IProductService, ProductService>();
-
+            register.AddTransient<IMenuService, MenuService>();
 
         }
     }
