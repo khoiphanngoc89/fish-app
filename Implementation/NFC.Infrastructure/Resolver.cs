@@ -22,6 +22,7 @@ namespace NFC.Infrastructure
             register.AddTransient<IBillRepository, BillRepository>();
             register.AddTransient<IMemberRepository, MemberRepository>();
             register.AddTransient<IMenuRepository, MenuRepository>();
+            register.AddTransient<ISubMenuRepository, SubMenuRepository>();
             register.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
             register.AddTransient<IProductRepository, ProductRepository>();
             register.AddTransient<IAppLogRepository, LogRepository>();

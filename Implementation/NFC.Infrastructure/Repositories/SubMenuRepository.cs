@@ -19,7 +19,7 @@ namespace NFC.Infrastructure.Repositories
 
         public SubMenu GetByParentId(int id)
         {
-            return this.SelectSingleOrDefault("GétubMenuByParentId", new Dictionary<string, object>
+            return this.SelectSingleOrDefault("GetSubMenuByParentId", new Dictionary<string, object>
             {
                 ["@ParentId"] = id
             });
