@@ -8,7 +8,7 @@ namespace NFC.Infrastructure.Repositories
 {
     public interface ISubMenuRepository : IGenericRepository<int, SubMenu>
     {
-        SubMenu GetByParentId(int id);
+        IEnumerable<SubMenu> GetByParentId(int id);
     }
 
     public class SubMenuRepository : GenericRepositoryBase<int, SubMenu>, ISubMenuRepository
@@ -17,9 +17,9 @@ namespace NFC.Infrastructure.Repositories
         {
         }
 
-        public SubMenu GetByParentId(int id)
+        public IEnumerable<SubMenu> GetByParentId(int id)
         {
-            return this.SelectSingleOrDefault("GetSubMenuByParentId", new Dictionary<string, object>
+            return this.Select("GetSubMenuByParentId", new Dictionary<string, object>
             {
                 ["@ParentId"] = id
             });

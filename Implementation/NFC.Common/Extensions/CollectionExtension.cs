@@ -17,7 +17,7 @@ namespace NFC.Common.Extensions
         /// </returns>
         public static bool IsNullOrEmpty<T>(this ICollection<T> collection)
         {
-            return collection == null || collection.Any();
+            return collection == null || collection.Count == 0;
         }
     }
 }

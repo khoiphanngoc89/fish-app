@@ -567,7 +567,15 @@ namespace NFC.Infrastructure.SharedKernel
         {
             foreach (var item in parmas)
             {
-                dp.Add($"@{item.Key}", item.Value);
+                if(!item.Key.Contains("@"))
+                {
+                    dp.Add($"@{item.Key}", item.Value);
+                }
+                else
+                {
+                    dp.Add($"{item.Key}", item.Value);
+                }
+                
             }
         }
 
@@ -620,7 +628,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// Gets the database information.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="cnn">The CNN.</param>
+        /// <param name="cnn">The connection.</param>
         /// <param name="storedName">Name of the stored.</param>
         /// <param name="parmas">The parmas.</param>
         /// <returns></returns>

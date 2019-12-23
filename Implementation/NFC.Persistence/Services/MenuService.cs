@@ -45,8 +45,8 @@ namespace NFC.Persistence.Services
                     continue;
                 }
 
-                var subMenu = this.subMenuRepository.GetByParentId(menu.Id);
-                menu.SubMenus.Add(subMenu);
+                var subMenus = this.subMenuRepository.GetByParentId(menu.Id);
+                subMenus.ToList().ForEach(n => menu.SubMenus.Add(n));
             }
 
             return menus.Select(menu => this.mapper.Map<Menu, MenuDTO>(menu));
