@@ -1,7 +1,6 @@
-import productConnector from './product-connector';
+import productConnector, {ProductInterface} from './product-connector';
 import menuConnector from './menu-connector';
-import homeConnector, { HomeInterface } from './home-connector';
-import { PRODUCT, HOME, MENU } from './connect-types';
+import { PRODUCT, MENU } from './connect-types';
 
 const ConnectorInterface = {
     getAllAsync() {},
@@ -11,7 +10,7 @@ const ConnectorInterface = {
     deleteAsync() {},
   };
 
-const connectors = { product: productConnector, menu: menuConnector, home: homeConnector };
+const connectors = { product: productConnector, menu: menuConnector };
 
 function bind(repositoryName, Interface) {
   return {
@@ -31,7 +30,6 @@ function bind(repositoryName, Interface) {
 // details of a repository without having to
 // touch all of the components which use it.
 export default {
-    productConnector: bind(PRODUCT, ConnectorInterface),
+    productConnector: bind(PRODUCT, ProductInterface),
     menuConnector: bind(MENU, ConnectorInterface),
-    homeConnector: bind(HOME, HomeInterface)
   };

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace NFC.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route(ApiConst.RootRoute)]
     public class MenuController : AbstractController
     {
         private readonly IMenuService mnenuService;

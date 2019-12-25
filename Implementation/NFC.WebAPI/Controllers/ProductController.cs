@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace NFC.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route(ApiConst.RootRoute)]
     public class ProductController : AbstractController
     {
         /// <summary>
@@ -18,6 +18,11 @@ namespace NFC.WebAPI.Controllers
         /// </summary>
         private readonly IProductService productService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductController"/> class.
+        /// </summary>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="productService">The product service.</param>
         public ProductController(IMapper mapper, IProductService productService) : base(mapper)
         {
             this.productService = productService;
@@ -36,11 +41,16 @@ namespace NFC.WebAPI.Controllers
             return CreatedAtAction(nameof(GetAllByPaing), result);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Gets the high light.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        [HttpPost]
         [Route(ApiConst.All4Home)]
-        public async Task<IActionResult> GetHighLight()
+        public async Task<IActionResult> GetHighLight([FromBody] ProductPagingRequest request)
         {
-            var result = await ExecuteAction(() => this.productService.GetHighlight());
+            var result = await ExecuteAction(() => this.productService.GetHighlight(request.PageNumber, request.PageSize, request.GetLastest));
             return CreatedAtAction(nameof(GetHighLight), result);
         }
 

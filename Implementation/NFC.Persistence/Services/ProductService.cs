@@ -14,7 +14,7 @@ namespace NFC.Persistence.Services
         /// Gets the highlight.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ProductDto> GetHighlight();
+        IEnumerable<ProductDto> GetHighlight(int pageNumber = 1, int pageSize = 6, bool getLatest = false);
     }
 
     public class ProductService : ServiceBase, IProductService
@@ -112,9 +112,9 @@ namespace NFC.Persistence.Services
         /// Gets the highlight.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductDto> GetHighlight()
+        public IEnumerable<ProductDto> GetHighlight(int pageNumber = 1, int pageSize = 6, bool getLatest = false)
         {
-            var products = this.productRepository.GetHighLight();
+            var products = this.productRepository.GetHighLight(pageNumber, pageSize, getLatest);
             return products.Select(product => this.mapper.Map<Product, ProductDto>(product));
         }
 

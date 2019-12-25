@@ -46,14 +46,15 @@
 
 <script>
 import vm from '@/models/product.js';
-import { PRODUCT_CONNECTOR, HOME_CONNECTOR } from '@/connectors/connect-types.js'
+import { PRODUCT_CONNECTOR } from '@/connectors/connect-types.js'
 
 export default {
-  inject: [PRODUCT_CONNECTOR, HOME_CONNECTOR],
+  inject: [PRODUCT_CONNECTOR],
   data: () => {
     return {
       model: vm.initModel(),
-      storage: vm.initStorage()
+      storage: vm.initStorage(),
+      general: vm.initGeneral()
     } 
   },
   props: {
@@ -64,14 +65,15 @@ export default {
   },
   async created() {
     let self = this;
+    if(self.isHome) self.general.pageSize = 6;
     await self.loadDataAsync()
   },
   methods: {
     async loadDataAsync() {
       let self = this;
       self.storage.products = self.isHome ? 
-        await self.homeConnector.getAllAsync() :
-        await self.productConnector.getAllAsync();
+        await self.productConnector.getHighlightAsync(self.general) :
+        await self.productConnector.getAllAsync(self.general);
     }
   }
 };
