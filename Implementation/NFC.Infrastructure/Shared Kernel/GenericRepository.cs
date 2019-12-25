@@ -12,12 +12,12 @@ using NFC.Application.Shared;
 namespace NFC.Infrastructure.SharedKernel
 {
     /// <summary>
-    /// 
+    /// Provides the common methods for all repositories.
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="System.IDisposable" />
-    /// <seealso cref="NFC.Persistence.IGenericRepository{TKey, TEntity}" />
+    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{TKey, TEntity}" />
     public class GenericRepositoryBase<TKey, TEntity> : IDisposable, IGenericRepository<TKey, TEntity>
         where TKey : IComparable
         where TEntity : class, IDomainEntity<TKey>
@@ -432,7 +432,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <typeparam name="T"></typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        private string BuildSqlQuery<T>(Expression<Func<T, object>> expression)
+        protected virtual string BuildSqlQuery<T>(Expression<Func<T, object>> expression)
         {
             var binaryExpression = (BinaryExpression)((UnaryExpression)expression.Body).Operand;
             var left = Expression.Lambda<Func<T, object>>(Expression.Convert(binaryExpression.Left, typeof(object)), expression.Parameters[0]);
@@ -446,7 +446,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// </summary>
         /// <param name="binaryExpression">The binary expression.</param>
         /// <returns></returns>
-        private string DetermineOperator(BinaryExpression binaryExpression)
+        protected virtual string DetermineOperator(BinaryExpression binaryExpression)
         {
             return binaryExpression.NodeType switch
             {
@@ -459,18 +459,15 @@ namespace NFC.Infrastructure.SharedKernel
             };
         }
 
-        
-
-
-
         #endregion
     }
 
     /// <summary>
-    /// Provides the repository that wrap the dapper
+    /// Provides the common methods to interact with database through dapper framework
     /// </summary>
-    /// <seealso cref="NFC.Persistence.IRepository" />
+    /// <remarks>The wraper dapper framework methods.</remarks>
     /// <seealso cref="System.IDisposable" />
+    /// <seealso cref="NFC.Infrastructure.SharedKernel.IRepository" />
     public class Repository : IRepository, IDisposable
     {
         #region Variables
