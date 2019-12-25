@@ -12,6 +12,13 @@ export default {
             image4: null
         }
     },
+    initGeneral: function() {
+        return {
+            pageNumber: 1,
+            pageSize: 30,
+            getLatest: false
+        }
+    },
     initStorage: function() {
         return {
             products: []
