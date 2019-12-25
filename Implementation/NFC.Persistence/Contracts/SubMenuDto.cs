@@ -7,7 +7,7 @@ namespace NFC.Persistence.Contracts
     /// </summary>
     /// <seealso cref="NFC.Application.Shared.DomainEntity{System.Int32}" />
     /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
-    public class SubMenuDto1 : DomainEntity<int>, IActiveMetadata
+    public class SubMenuDto : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>
         /// Gets or sets the parent id.
