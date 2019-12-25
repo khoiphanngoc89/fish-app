@@ -52,7 +52,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// The skip properties
         /// </summary>
-        private readonly IEnumerable<string> skipProps;
+        private readonly IEnumerable<string> ignoreProps;
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace NFC.Infrastructure.SharedKernel
         public GenericRepositoryBase(IRepository repository)
         {
             this.tblName = this.GetTableName(typeof(TEntity));
-            this.skipProps = typeof(TEntity).GetProperties().Where(n => n.PropertyType.GetProperty(n.Name).GetAccessors()[0].IsVirtual)?.Select(n => n.Name);
+            this.ignoreProps = typeof(TEntity).GetProperties().Where(n => n.PropertyType.GetProperty(n.Name).GetAccessors()[0].IsVirtual)?.Select(n => n.Name);
             this.repository = repository;
         }
 
@@ -109,6 +109,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets all by paging.
         /// </summary>
+        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -121,6 +122,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets all by paging.
         /// </summary>
+        /// <param name="storeName">Name of the store.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -131,13 +133,68 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
+        /// Gets all by paging.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storeName">Name of the store.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        public IEnumerable<T> GetAllByPaging<T>(string storeName, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class
+        {
+            return this.repository.Select<T>(storeName, this.BuildPagingParams(pageNumber, pageSize, getLatest));
+        }
+
+        /// <summary>
+        /// Gets the by by paging search.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        public IEnumerable<TEntity> GetByByPagingSearch(string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false)
+        {
+            return this.Select<TEntity>($"GetAll{this.tblName}ByPagingSearch", this.BuildPagingSearchParams(name, pageNumber, pageSize, getLatest));
+        }
+
+        
+
+        /// <summary>
+        /// Gets the by by paging search.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storeName">Name of the store.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        public IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Find by condition.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, object>> expression)
         {
-            return this.repository.Query<TEntity>(this.BuildSql(expression));
+            return this.repository.Query<TEntity>(this.BuildSqlQuery(expression));
+        }
+
+        /// <summary>
+        /// Find by condition
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns></returns>
+        public IEnumerable<T> Find<T>(Expression<Func<T, object>> expression) where T : class
+        {
+            return this.repository.Query<T>(this.BuildSqlQuery(expression));
         }
 
         /// <summary>
@@ -160,48 +217,14 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
-        /// Selects the single or default.
-        /// </summary>
-        /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
-        /// <returns></returns>
-        public TEntity SelectSingleOrDefault(string storedName, IDictionary<string, object> parmas = null)
-        {
-            return this.repository.SelectSingleOrDefault<TEntity>(storedName, parmas);
-        }
-
-        /// <summary>
         /// Selects the specified instances.
         /// </summary>
         /// <param name="storedName">Name of the stored.</param>
         /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
-        public IEnumerable<TEntity> Select(string storedName, IDictionary<string, object> parmas)
+        public IEnumerable<TEntity> Select(string storedName, IDictionary<string, object> parmas = null)
         {
             return this.repository.Select<TEntity>(storedName, parmas);
-        }
-
-        /// <summary>
-        /// Executes the specified stored procedure.
-        /// </summary>
-        /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
-        /// <returns></returns>
-        public IEnumerable<TEntity> Execute(string storedName, IDictionary<string, object> parmas)
-        {
-            return this.repository.Execute<TEntity>(storedName, parmas);
-        }
-
-        /// <summary>
-        /// Selects the single or default.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
-        /// <returns></returns>
-        public T SelectSingleOrDefault<T>(string storedName, IDictionary<string, object> parmas) where T : class
-        {
-            return this.repository.SelectSingleOrDefault<T>(storedName, parmas);
         }
 
         /// <summary>
@@ -217,40 +240,49 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
+        /// Selects the single or default.
+        /// </summary>
+        /// <param name="storedName">Name of the stored.</param>
+        /// <param name="parmas">The parmas.</param>
+        /// <returns></returns>
+        public TEntity SelectSingleOrDefault(string storedName, IDictionary<string, object> parmas = null)
+        {
+            return this.repository.SelectSingleOrDefault<TEntity>(storedName, parmas);
+        }
+
+        /// <summary>
+        /// Selects the single or default.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storedName">Name of the stored.</param>
+        /// <param name="parmas">The parmas.</param>
+        /// <returns></returns>
+        public T SelectSingleOrDefault<T>(string storedName, IDictionary<string, object> parmas = null) where T : class
+        {
+            return this.repository.SelectSingleOrDefault<T>(storedName, parmas);
+        }
+
+        /// <summary>
         /// Executes the specified stored procedure.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="storedName">Name of the stored.</param>
         /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
-        public IEnumerable<T> Execute<T>(string storedName, IDictionary<string, object> parmas) where T : class
+        public IEnumerable<T> Execute<T>(string storedName, IDictionary<string, object> parmas = null) where T : class
         {
             return this.repository.Execute<T>(storedName, parmas);
         }
 
         /// <summary>
-        /// Gets all by paging.
+        /// Executes the specified stored procedure.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="storeName"></param>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <param name="storedName">Name of the stored.</param>
+        /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
-        public IEnumerable<T> GetAllByPaging<T>(string storeName, int pageNumber = 1, int pageSize = 100, bool getLatest = false) where T : class
+        public IEnumerable<TEntity> Execute(string storedName, IDictionary<string, object> parmas = null)
         {
-            return this.repository.Select<T>(storeName, this.BuildPagingParams(pageNumber, pageSize, getLatest));
-        }
-
-        /// <summary>
-        /// Find by condition
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <returns></returns>
-        public IEnumerable<T> Find<T>(Expression<Func<T, object>> expression) where T : class
-        {
-            return this.repository.Query<T>(this.BuildSql(expression));
+            return this.repository.Execute<TEntity>(storedName, parmas);
         }
 
         #endregion
@@ -303,15 +335,29 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
+        /// Builds the parmas.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        protected virtual IDictionary<string, object> BuildParmas(TKey id)
+        {
+            var dic = new Dictionary<string, object>
+            {
+                { Const.Id, id }
+            };
+            return dic;
+        }
+
+        /// <summary>
         /// Removes the not mapping props.
         /// </summary>
         /// <param name="dicMapping">The dic mapping.</param>
         /// <returns></returns>
         protected virtual IDictionary<string, object> RemoveNotMappingProps(IDictionary<string, object> dicMapping)
         {
-            if (this.skipProps != null)
+            if (this.ignoreProps != null)
             {
-                foreach (var prop in this.skipProps)
+                foreach (var prop in this.ignoreProps)
                 {
                     dicMapping.Remove(prop);
                 }
@@ -333,20 +379,6 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
-        /// Builds the parmas.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildParmas(TKey id)
-        {
-            var dic = new Dictionary<string, object>
-            {
-                { Const.Id, id }
-            };
-            return dic;
-        }
-
-        /// <summary>
         /// Gets table name.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -358,21 +390,9 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
-        /// Gets the name of the name by table.
-        /// </summary>
-        /// <param name="tblName">Name of the table.</param>
-        /// <param name="isPlural">if set to <c>true</c> [is plural].</param>
-        /// <returns></returns>
-        private Tuple<string, string> GetNameByTblName(string tblName, bool isPlural = false)
-        {
-            var arr = tblName.Split('.');
-            var name = arr[1];
-            return new Tuple<string, string>(arr[0], isPlural ? name : name.Remove(name.Length - 1, 1));
-        }
-
-        /// <summary>
         /// Builds the paging parameters.
         /// </summary>
+        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -388,12 +408,31 @@ namespace NFC.Infrastructure.SharedKernel
         }
 
         /// <summary>
-        /// Build sql.
+        /// Builds the paging search parameters.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        protected virtual IDictionary<string, object> BuildPagingSearchParams(string name, int pageNumber, int pageSize, bool getLatest)
+        {
+            return new Dictionary<string, object>
+            {
+                [Const.Name] = name,
+                [Const.PageNumber] = pageNumber,
+                [Const.PageSize] = pageSize,
+                [Const.GetLatest] = getLatest
+            };
+        }
+
+        /// <summary>
+        /// Build sql query.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        private string BuildSql<T>(Expression<Func<T, object>> expression)
+        private string BuildSqlQuery<T>(Expression<Func<T, object>> expression)
         {
             var binaryExpression = (BinaryExpression)((UnaryExpression)expression.Body).Operand;
             var left = Expression.Lambda<Func<T, object>>(Expression.Convert(binaryExpression.Left, typeof(object)), expression.Parameters[0]);
@@ -419,6 +458,10 @@ namespace NFC.Infrastructure.SharedKernel
                 _ => SqlOperator.Equal.GetDescription(),
             };
         }
+
+        
+
+
 
         #endregion
     }
@@ -565,7 +608,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="parmas">The parmas.</param>
         private void BuildParmas(DynamicParameters dp, IDictionary<string, object> parmas)
         {
-            
+
             foreach (var item in parmas)
             {
                 var key = !item.Key.Contains("@") ? $"@{item.Key}" : item.Key;

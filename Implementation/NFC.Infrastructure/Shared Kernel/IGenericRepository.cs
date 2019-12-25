@@ -48,8 +48,27 @@ namespace NFC.Infrastructure.SharedKernel
         IEnumerable<TEntity> Find(Expression<Func<TEntity, object>> expression);
 
         /// <summary>
+        /// Finds by condition.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <returns></returns>
+        IEnumerable<T> Find<T>(Expression<Func<T, object>> expression) where T : class;
+
+        /// <summary>
         /// Gets all by paging.
         /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        IEnumerable<TEntity> GetAllByPaging(int pageNumber = 1, int pageSize = 30, bool getLatest = false);
+
+        /// <summary>
+        /// Gets all by paging.
+        /// </summary>
+        /// <param name="storeName">Name of the store.</param>
+        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -59,11 +78,36 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets all by paging.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storeName">Name of the store.</param>
+        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
-        IEnumerable<TEntity> GetAllByPaging(int pageNumber = 1, int pageSize = 100, bool getLatest = false);
+        IEnumerable<T> GetAllByPaging<T>(string storeName, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class;
+
+        /// <summary>
+        /// Gets the by by paging search.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        IEnumerable<TEntity> GetByByPagingSearch(string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false);
+
+        /// <summary>
+        /// Gets the by by paging search.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storeName">Name of the store.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <returns></returns>
+        IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T: class;
 
         /// <summary>
         /// Remove an instance.
@@ -80,22 +124,6 @@ namespace NFC.Infrastructure.SharedKernel
         TEntity SelectSingleOrDefault(string storedName, IDictionary<string, object> parmas = null);
 
         /// <summary>
-        /// Selects the specified instances.
-        /// </summary>
-        /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
-        /// <returns></returns>
-        IEnumerable<TEntity> Select(string storedName, IDictionary<string, object> parmas = null);
-
-        /// <summary>
-        /// Executes the specified stored procedure.
-        /// </summary>
-        /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
-        /// <returns></returns>
-        IEnumerable<TEntity> Execute(string storedName, IDictionary<string, object> parmas = null);
-
-        /// <summary>
         /// Selects the single or default.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -103,6 +131,14 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
         T SelectSingleOrDefault<T>(string storedName, IDictionary<string, object> parmas = null) where T : class;
+
+        /// <summary>
+        /// Selects the specified instances.
+        /// </summary>
+        /// <param name="storedName">Name of the stored.</param>
+        /// <param name="parmas">The parmas.</param>
+        /// <returns></returns>
+        IEnumerable<TEntity> Select(string storedName, IDictionary<string, object> parmas = null);
 
         /// <summary>
         /// Selects the specified instances.
@@ -116,27 +152,20 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Executes the specified stored procedure.
         /// </summary>
+        /// <param name="storedName">Name of the stored.</param>
+        /// <param name="parmas">The parmas.</param>
+        /// <returns></returns>
+        IEnumerable<TEntity> Execute(string storedName, IDictionary<string, object> parmas = null);
+
+        /// <summary>
+        /// Executes the specified stored procedure.
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="storedName">Name of the stored.</param>
         /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
         IEnumerable<T> Execute<T>(string storedName, IDictionary<string, object> parmas = null) where T : class;
 
-        /// <summary>
-        /// Gets all by paging.
-        /// </summary>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
-        /// <returns></returns>
-        IEnumerable<T> GetAllByPaging<T>(string storeName, int pageNumber = 1, int pageSize = 100, bool getLatest = false) where T : class;
-
-        /// <summary>
-        /// Finds by condition.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <returns></returns>
-        IEnumerable<T> Find<T>(Expression<Func<T, object>> expression) where T : class;
     }
 
     /// <summary>

@@ -2,7 +2,7 @@
 
 namespace NFC.Persistence.Contracts
 {
-    public class ProductDTO : DomainEntity<long>, IActiveMetadata, ISeoMetadata
+    public class ProductDto : DomainEntity<long>, IActiveMetadata, ISeoMetadata
     {
         /// <summary>
         /// Gets or sets the name.
@@ -106,6 +106,6 @@ namespace NFC.Persistence.Contracts
         /// <value>
         /// The product category.
         /// </value>
-        public ProductCategoryDTO ProductCategory { get; set; }
+        public ProductCategoryDto ProductCategory { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NFC.Common.Constants
+﻿namespace NFC.Common.Constants
 {
     /// <summary>
     /// 
@@ -28,6 +24,11 @@ namespace NFC.Common.Constants
         /// The identifier
         /// </summary>
         public const string Id = "Id";
+
+        /// <summary>
+        /// The name
+        /// </summary>
+        public const string Name = "Name";
 
         /// <summary>
         /// The default connection

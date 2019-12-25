@@ -9,9 +9,9 @@ namespace NFC.Persistence
     {
         public MappingProfile()
         {
-            CreateMap<ProductDTO, Product>().ReverseMap();
-            CreateMap<Menu, MenuDTO>()
-                .ForMember(dest => dest.SubMenus, opts => opts.MapFrom(src => src.SubMenus.Select(n => new SubMenuDTO
+            CreateMap<ProductDto, Product>().ReverseMap();
+            CreateMap<Menu, MenuDto>()
+                .ForMember(dest => dest.SubMenus, opts => opts.MapFrom(src => src.SubMenus.Select(n => new SubMenuDto
                 {
                     Id = n.Id,
                     Name = n.Name,

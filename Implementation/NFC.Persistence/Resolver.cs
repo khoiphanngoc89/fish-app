@@ -1,6 +1,5 @@
 ﻿using NFC.Application.DependencyManager;
 using NFC.Persistence.Services;
-using System;
 using System.ComponentModel.Composition;
 
 namespace NFC.Persistence

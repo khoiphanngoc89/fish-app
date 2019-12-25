@@ -1,11 +1,14 @@
 ﻿using NFC.Application.Shared;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Persistence.Contracts
 {
-    public class MenuDTO : DomainEntity<int>, IActiveMetadata
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.Shared.DomainEntity{System.Int32}" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
+    public class MenuDto : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>
         /// Gets or sets the name.
@@ -61,14 +64,14 @@ namespace NFC.Persistence.Contracts
         /// <value>
         /// The sub menus.
         /// </value>
-        public virtual ICollection<SubMenuDTO> SubMenus { get; private set; }
+        public virtual ICollection<SubMenuDto> SubMenus { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Menu"/> class.
         /// </summary>
-        public MenuDTO()
+        public MenuDto()
         {
-            this.SubMenus = new List<SubMenuDTO>();
+            this.SubMenus = new List<SubMenuDto>();
         }
     }
 }

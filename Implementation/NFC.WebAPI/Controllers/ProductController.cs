@@ -27,13 +27,13 @@ namespace NFC.WebAPI.Controllers
         /// Gets all.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route(ApiConst.All)]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllByPaing([FromBody] ProductPagingRequest request)
         {
-            var result = await ExecuteAction(() => this.productService.GetAll());
-            return CreatedAtAction(nameof(GetAll), result);
+            var result = await ExecuteAction(() => this.productService.GetAllPaging(request.PageNumber, request.PageSize, request.GetLastest));
+            return CreatedAtAction(nameof(GetAllByPaing), result);
         }
 
         [HttpGet]
@@ -54,9 +54,9 @@ namespace NFC.WebAPI.Controllers
         [Authorize]
         public async Task<IActionResult> Create([FromBody] ProductRequest request)
         {
-            var data = this.mapper.Map<ProductRequest, ProductDTO>(request);
+            var data = this.mapper.Map<ProductRequest, ProductDto>(request);
             var result = await ExecuteAction(() => this.productService.Add(data));
-            return CreatedAtAction(nameof(GetAll), result);
+            return CreatedAtAction(nameof(Create), result);
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace NFC.WebAPI.Controllers
         [Route(ApiConst.Update)]
         public async Task<IActionResult> Update(long id, [FromBody] ProductRequest request)
         {
-            var data = this.mapper.Map<ProductRequest, ProductDTO>(request);
+            var data = this.mapper.Map<ProductRequest, ProductDto>(request);
             var result = await ExecuteAction(() => this.productService.Update(id, data));
-            return CreatedAtAction(nameof(GetAll), result);
+            return CreatedAtAction(nameof(Update), result);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace NFC.WebAPI.Controllers
         public async Task<IActionResult> Delete(long id)
         {
             var result = await ExecuteAction(() => this.productService.Delete(id));
-            return CreatedAtAction(nameof(GetAll), result);
+            return CreatedAtAction(nameof(Delete), result);
         }
     }
 }
