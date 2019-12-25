@@ -1,15 +1,23 @@
 ﻿using AutoMapper;
 using System;
 using System.Transactions;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Persistence.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ServiceBase
     {
+        /// <summary>
+        /// The mapper
+        /// </summary>
         protected readonly IMapper mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceBase"/> class.
+        /// </summary>
+        /// <param name="mapper">The mapper.</param>
         protected ServiceBase(IMapper mapper)
         {
             this.mapper = mapper;
@@ -23,19 +31,10 @@ namespace NFC.Persistence.Services
         /// <returns></returns>
         protected static TResult OnServiceExecute<TResult>(Func<TResult> action)
         {
-            try
-            {
-                using (var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    var result = action.Invoke();
-                    scoped.Complete();
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            var result = action.Invoke();
+            scoped.Complete();
+            return result;
         }
 
         /// <summary>
@@ -44,18 +43,9 @@ namespace NFC.Persistence.Services
         /// <param name="action">The action.</param>
         protected static void OnServiceExecute(Action action)
         {
-            try
-            {
-                using (var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-                {
-                    action.Invoke();
-                    scoped.Complete();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            action.Invoke();
+            scoped.Complete();
         }
     }
 }

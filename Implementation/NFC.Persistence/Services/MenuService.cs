@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace NFC.Persistence.Services
 {
-    public interface IMenuService : IService<int, MenuDTO>
+    public interface IMenuService : IService<int, MenuDto>
     {
 
     }
@@ -25,7 +25,7 @@ namespace NFC.Persistence.Services
             this.subMenuRepository = subMenuRepository;
         }
 
-        public int Add(MenuDTO model)
+        public int Add(MenuDto model)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace NFC.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MenuDTO> GetAll()
+        public IEnumerable<MenuDto> GetAll()
         {
             var menus = this.menuRepository.GetAll();
             foreach(var menu in menus)
@@ -49,20 +49,20 @@ namespace NFC.Persistence.Services
                 subMenus.ToList().ForEach(n => menu.SubMenus.Add(n));
             }
 
-            return menus.Select(menu => this.mapper.Map<Menu, MenuDTO>(menu));
+            return menus.Select(menu => this.mapper.Map<Menu, MenuDto>(menu));
         }
 
-        public IEnumerable<MenuDTO> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
+        public IEnumerable<MenuDto> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
         {
             throw new NotImplementedException();
         }
 
-        public MenuDTO GetById(int key)
+        public MenuDto GetById(int key)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(int key, MenuDTO model)
+        public void Update(int key, MenuDto model)
         {
             throw new NotImplementedException();
         }

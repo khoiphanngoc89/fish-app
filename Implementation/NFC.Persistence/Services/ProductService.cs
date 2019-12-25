@@ -3,16 +3,14 @@ using NFC.Common.Utility;
 using NFC.Domain.Entities;
 using NFC.Infrastructure.Repositories;
 using NFC.Persistence.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace NFC.Persistence.Services
 {
-    public interface IProductService : IService<long, ProductDTO>
+    public interface IProductService : IService<long, ProductDto>
     {
-        IEnumerable<ProductDTO> GetHighlight();
+        IEnumerable<ProductDto> GetHighlight();
     }
 
     public class ProductService : ServiceBase, IProductService
@@ -23,14 +21,14 @@ namespace NFC.Persistence.Services
             this.productRepository = productRepository;
         }
 
-        public long Add(ProductDTO model)
+        public long Add(ProductDto model)
         {
             return OnServiceExecute(() =>
             {
-                var product = this.mapper.Map<ProductDTO, Product>(model);
+                var product = this.mapper.Map<ProductDto, Product>(model);
                 return this.productRepository.Add(product);
             });
-           
+
         }
 
         public void Delete(long key)
@@ -41,39 +39,37 @@ namespace NFC.Persistence.Services
             });
         }
 
-        public IEnumerable<ProductDTO> GetAll()
+        public IEnumerable<ProductDto> GetAll()
         {
-                var products = this.productRepository.GetAll();
-                return products.Select(product => this.mapper.Map<Product, ProductDTO>(product));
+            var products = this.productRepository.GetAll();
+            return products.Select(product => this.mapper.Map<Product, ProductDto>(product));
         }
 
-        public IEnumerable<ProductDTO> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
+        public IEnumerable<ProductDto> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
         {
-           
-                var products = this.productRepository.GetAllByPaging(pageNumber, pageSize, getLastest);
-                return products.Select(product => this.mapper.Map<Product, ProductDTO>(product));
-           
+            var products = this.productRepository.GetAllByPaging(pageNumber, pageSize, getLastest);
+            return products.Select(product => this.mapper.Map<Product, ProductDto>(product));
         }
 
-        public ProductDTO GetById(long key)
+        public ProductDto GetById(long key)
         {
             var product = this.productRepository.GetSingleById(key);
-            return this.mapper.Map<Product, ProductDTO>(product);
+            return this.mapper.Map<Product, ProductDto>(product);
         }
 
-        public IEnumerable<ProductDTO> GetHighlight()
+        public IEnumerable<ProductDto> GetHighlight()
         {
             var products = this.productRepository.GetHighLight();
-            return products.Select(product => this.mapper.Map<Product, ProductDTO>(product));
+            return products.Select(product => this.mapper.Map<Product, ProductDto>(product));
         }
 
-        public void Update(long key, ProductDTO model)
+        public void Update(long key, ProductDto model)
         {
             OnServiceExecute(() =>
             {
                 var original = this.productRepository.GetSingleById(key);
                 Preconditions.CheckNull(original, "Product");
-                var product = this.mapper.Map<ProductDTO, Product>(model);
+                var product = this.mapper.Map<ProductDto, Product>(model);
                 this.productRepository.Update(key, product);
             });
         }
