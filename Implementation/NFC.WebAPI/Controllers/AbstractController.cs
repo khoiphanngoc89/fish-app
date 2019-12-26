@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.Common;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -40,28 +42,35 @@ namespace NFC.WebAPI.Controllers
         protected static async Task<IResponseResult<object>> ExecuteAction<TResult>(Expression<Func<TResult>> action)
         {
             var response = new ResponseResult<object>();
-            try
+
+            var _output = await Task.Factory.StartNew(async () =>
             {
-                var _output = await Task.Factory.StartNew(() =>
+                var expr = Expression.Invoke(action);
+                Expression<Func<TResult>> lambda = Expression.Lambda<Func<TResult>>(expr);
+                Func<TResult> compiled = lambda.Compile();
+                var output = compiled.Invoke();
+                return output;
+
+            }).ConfigureAwait(false);
+
+            if (!Equals(_output.Exception, null) && _output.Exception.InnerExceptions.Any())
+            {
+                // aa
+                if (_output.Exception.InnerException is SqlException)
                 {
-                    var expr = Expression.Invoke(action);
-                    Expression<Func<TResult>> lambda = Expression.Lambda<Func<TResult>>(expr);
-                    Func<TResult> compiled = lambda.Compile();
-                    var output = compiled.Invoke();
-                    return output;
-                });
-
+                    response.Errors.Add((_output.Exception.InnerException as SqlException).Number);
+                }
+                else
+                {
+                    response.Errors.Add(_output.Exception.Message);
+                }
+            }
+            else
+            {
                 response.Result = _output;
+            }
 
-            }
-            catch (DbException ex)
-            {
-                response.Errors.Add(ex.ErrorCode);
-            }
-            catch (Exception ex)
-            {
-                response.Errors.Add(ex.Message);
-            }
+
 
             return response;
         }

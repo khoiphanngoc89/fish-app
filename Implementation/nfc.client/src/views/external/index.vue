@@ -8,8 +8,8 @@
 <script>
 export default {
   components: {
-    'slider': () => import("@/components/external/slider"),
-    'product-item': () => import("@/components/external/product-item"),
+    'slider': () => import("@/components/external/SliderBar"),
+    'product-item': () => import("@/components/external/ProductItem"),
   }
 }
 </script>
