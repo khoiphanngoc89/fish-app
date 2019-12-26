@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import { HOME_CONNECTOR } from '@/connectors/connect-types.js'
+import { PRODUCT_CONNECTOR } from '@/connectors/connect-types.js'
 import vm from '@/models/product.js';
 export default {
-  inject: [HOME_CONNECTOR],
+  inject: [PRODUCT_CONNECTOR],
   data() {
     return {
       storage: vm.initStorage()
@@ -33,7 +33,7 @@ export default {
   methods: {
     loadDataAsync: async function() {
       let self = this;
-      self.storage.products = await self.homeConnector.getHighlightAsync();
+      self.storage.products = await self.productConnector.getHighlightAsync();
     },
     getImgUrl: function(value) {
       return `https://picsum.photos/id/43${value}/1230/500`;
