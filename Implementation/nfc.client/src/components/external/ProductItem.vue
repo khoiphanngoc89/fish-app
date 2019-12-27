@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="row">
+    <div v-if="storage.products.length" class="row">
       <div v-for="product in storage.products" :key="product.id" class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
           <a href="#">
