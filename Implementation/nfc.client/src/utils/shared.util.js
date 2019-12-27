@@ -21,8 +21,8 @@ export default {
         };
     },
     getAPIData: function(data) {
-        if (data.hasError)
-            throw Error(data.Errors[0]);
+        debugger
+        if (data.hasError) throw Error(data.errors[0]);
         return data.result;
     },
     resolveImg: function(imagePath) {

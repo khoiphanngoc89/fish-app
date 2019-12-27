@@ -1,14 +1,8 @@
-import productConnector, {ProductInterface} from './product-connector';
+import productConnector from './product-connector';
 import menuConnector from './menu-connector';
 import { PRODUCT, MENU } from './connect-types';
+import { IConnector, IProductConnector } from './iconnector'
 
-const ConnectorInterface = {
-    getAllAsync() {},
-    getByIdAsync() {},
-    addAsync() {},
-    updateAsync() {},
-    deleteAsync() {},
-  };
 
 const connectors = { product: productConnector, menu: menuConnector };
 
@@ -30,6 +24,6 @@ function bind(repositoryName, Interface) {
 // details of a repository without having to
 // touch all of the components which use it.
 export default {
-    productConnector: bind(PRODUCT, ProductInterface),
-    menuConnector: bind(MENU, ConnectorInterface),
+    productConnector: bind(PRODUCT, IProductConnector),
+    menuConnector: bind(MENU, IConnector),
   };
