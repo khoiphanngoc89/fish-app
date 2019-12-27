@@ -67,7 +67,7 @@ namespace NFC.WebAPI.Controllers
             }
             else
             {
-                response.Result = _output;
+                response.Result = _output.Result;
             }
 
 

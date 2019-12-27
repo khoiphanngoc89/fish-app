@@ -10,20 +10,19 @@
         </b-navbar-item>
       </template>
       <template slot="start">
-        <b-navbar-item href="#">
-          <b-icon icon="home" />
-          <embed/>
-          <span class="home-nav">Home</span>
-        </b-navbar-item>
-        <b-navbar-dropdown label="Fish">
-          <b-navbar-item href="#">About</b-navbar-item>
-          <b-navbar-item href="#">Contact</b-navbar-item>
-        </b-navbar-dropdown>
-        <b-navbar-dropdown label="Policy">
-          <b-navbar-item href="#">About</b-navbar-item>
-          <b-navbar-item href="#">Contact</b-navbar-item>
-        </b-navbar-dropdown>
-        <b-navbar-item href="#">Contact Us</b-navbar-item>
+        <template v-for="menu in storage.menus">
+          <b-navbar-item v-if="menu.menuType > 1 && !menu.hasSub" :key="menu.id" tag="router-link" :to="{ path: menu.url }">
+            <template v-if="menu.image">
+              <b-icon :icon="menu.image" />
+              <embed/>
+            </template>
+            <span :class="{'home-nav': menu.name =='Home' }">{{ menu.name }}</span>
+          </b-navbar-item>
+          
+          <b-navbar-dropdown :label="menu.name" :key="menu.id" v-if="menu.menuType > 1 && menu.hasSub" >
+            <b-navbar-item  v-for="submenu in menu.subMenus" :key="submenu.id" :href="submenu.url"> {{ submenu.name }}</b-navbar-item>
+          </b-navbar-dropdown>
+        </template>
       </template>
 
       <template slot="end">
@@ -68,6 +67,7 @@ export default {
     loadDataAsync: async function() {
       let self = this;
       self.storage.menus = await self.menuConnector.getAllAsync();
+      debugger
     }
   }
   
