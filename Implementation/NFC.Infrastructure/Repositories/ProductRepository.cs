@@ -30,6 +30,13 @@ namespace NFC.Infrastructure.Repositories
         {
         }
 
+        /// <summary>
+        /// Gets the high light.
+        /// </summary>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="getLastest">if set to <c>true</c> [get lastest].</param>
+        /// <returns></returns>
         public IEnumerable<Product> GetHighLight(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
         {
             return this.Select("GetProductHighlight", this.BuildPagingParams(pageNumber, pageSize, getLastest));
