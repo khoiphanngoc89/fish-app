@@ -10,7 +10,11 @@ namespace NFC.Infrastructure.Repositories
     /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Product}" />
     public interface IProductRepository : IGenericRepository<long, Product>
     {
-        IEnumerable<Product> GetHighLight(int pageNumber = 1, int pageSize = 30, bool getLastest= false);
+        /// <summary>
+        /// Gets the high light.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Product> GetHighLight();
     }
 
     /// <summary>
@@ -35,9 +39,9 @@ namespace NFC.Infrastructure.Repositories
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLastest">if set to <c>true</c> [get lastest].</param>
         /// <returns></returns>
-        public IEnumerable<Product> GetHighLight(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
+        public IEnumerable<Product> GetHighLight()
         {
-            return this.Select("GetProductHighlight", this.BuildPagingParams(pageNumber, pageSize, getLastest));
+            return this.Select("GetProductHighlight");
         }
     }
 

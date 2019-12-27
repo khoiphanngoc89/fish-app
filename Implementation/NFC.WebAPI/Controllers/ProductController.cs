@@ -35,10 +35,10 @@ namespace NFC.WebAPI.Controllers
         [HttpPost]
         [Route(ApiConst.All)]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAllByPaing([FromBody] ProductPagingRequest request)
+        public async Task<IActionResult> GetAll([FromBody] ProductPagingRequest request)
         {
             var result = await ExecuteAction(() => this.productService.GetAllPaging(request.PageNumber, request.PageSize, request.GetLastest));
-            return CreatedAtAction(nameof(GetAllByPaing), result);
+            return CreatedAtAction(nameof(GetAll), result);
         }
 
         /// <summary>
@@ -48,10 +48,18 @@ namespace NFC.WebAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route(ApiConst.All4Home)]
-        public async Task<IActionResult> GetHighLight([FromBody] ProductPagingRequest request)
+        public async Task<IActionResult> GetAllProduct([FromBody] ProductPagingRequest request)
         {
-            var result = await ExecuteAction(() => this.productService.GetHighlight(request.PageNumber, request.PageSize, request.GetLastest));
-            return CreatedAtAction(nameof(GetHighLight), result);
+            var result = await ExecuteAction(() => this.productService.GetAllPaging(request.PageNumber, request.PageSize, request.GetLastest));
+            return CreatedAtAction(nameof(GetAllProduct), result);
+        }
+
+        [HttpGet]
+        [Route(ApiConst.Highlight)]
+        public async Task<IActionResult> GetHighlight()
+        {
+            var result = await ExecuteAction(() => this.productService.GetHighlight());
+            return CreatedAtAction(nameof(GetHighlight), result);
         }
 
         /// <summary>

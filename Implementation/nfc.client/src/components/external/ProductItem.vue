@@ -70,7 +70,7 @@ export default {
     async loadDataAsync() {
       let self = this;
       self.storage.products =
-        await self.productConnector.getAll(self.general);
+        await self.productConnector.getAllAsync(self.general);
         
     }
   }
