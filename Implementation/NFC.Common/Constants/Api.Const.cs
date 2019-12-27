@@ -18,6 +18,11 @@
         public const string All4Home = "All/Home";
 
         /// <summary>
+        /// The highlight
+        /// </summary>
+        public const string Highlight = "HighLight";
+
+        /// <summary>
         /// The create
         /// </summary>
         public const string Create = "Create";
