@@ -10,8 +10,8 @@ export const ProductInterface = {
   };
 
 export default {
-    async getHighlightAsync({pageNumber, pageSize, getLatest}) {
-        return await Connector.post(`${endpoint}/highlight`, this.buildParams(pageNumber, pageSize, getLatest));
+    async getHighlightAsync() {
+        return await Connector.get(`${endpoint}/highlight`);
     },
     async getAllAsync({pageNumber, pageSize, getLatest}) {
         return await Connector.post(`${endpoint}/all/home`, this.buildParams(pageNumber, pageSize, getLatest));
