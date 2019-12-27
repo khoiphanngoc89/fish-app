@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     onLogin() {
-      debugger
       let self = this;
       self.onBusyIndicator();
       self.$store
