@@ -3,9 +3,8 @@
     <div class="row">
       <div v-for="product in storage.products" :key="product.id" class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-          <a href="#"
-            ><img class="card-img-top" :src="product.image1" alt=""
-          /></a>
+          <a href="#">
+            <img class="card-img-top" :src="product.image1" alt=""/></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#">{{ product.name }}</a>
@@ -57,23 +56,22 @@ export default {
       general: vm.initGeneral()
     } 
   },
-  props: {
-    isHome: {
-      type: Boolean,
-      default: () => false
-    }
-  },
-  async created() {
+  async mounted() {
     let self = this;
     if(self.isHome) self.general.pageSize = 6;
-    await self.loadDataAsync()
+    await self.loadDataAsync();
+  },
+  computed: {
+    isHome() {
+      return window.location.pathname == '/';
+    }
   },
   methods: {
     async loadDataAsync() {
       let self = this;
-      self.storage.products = self.isHome ? 
-        await self.productConnector.getHighlightAsync(self.general) :
-        await self.productConnector.getAllAsync(self.general);
+      self.storage.products =
+        await self.productConnector.getAll(self.general);
+        
     }
   }
 };

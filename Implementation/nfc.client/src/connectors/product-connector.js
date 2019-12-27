@@ -1,13 +1,5 @@
 import Connector from './connector-base.js';
 const endpoint = '/product'
-export const ProductInterface = {
-    getHighlightAsync() {},
-    getAllAsync() {},
-    getByIdAsync() {},
-    addAsync() {},
-    updateAsync() {},
-    deleteAsync() {}
-  };
 
 export default {
     async getHighlightAsync() {

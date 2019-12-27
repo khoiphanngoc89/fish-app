@@ -3,7 +3,6 @@ import menuConnector from './menu-connector';
 import { PRODUCT, MENU } from './connect-types';
 import { IConnector, IProductConnector } from './iconnector'
 
-
 const connectors = { product: productConnector, menu: menuConnector };
 
 function bind(repositoryName, Interface) {
