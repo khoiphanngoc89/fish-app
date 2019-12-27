@@ -1,8 +1,6 @@
 ﻿using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Infrastructure.Repositories
 {
