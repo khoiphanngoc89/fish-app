@@ -93,7 +93,7 @@ namespace NFC.Persistence.Services
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLastest">if set to <c>true</c> [get lastest].</param>
         /// <returns></returns>
-        public IEnumerable<MenuDto> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLastest = false)
+        public IEnumerable<MenuDto> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLatest = false)
         {
             throw new NotImplementedException();
         }
