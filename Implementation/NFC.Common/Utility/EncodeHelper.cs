@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace NFC.Common.Utility
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class EncodeHelper
     {
         /// <summary>

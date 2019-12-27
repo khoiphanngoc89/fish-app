@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Application.DependencyManager
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.DependencyManager.IDependencyRegister" />
     public class DependencyRegister : IDependencyRegister
     {
         // <summary>

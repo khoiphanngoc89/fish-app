@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NFC.Application.DependencyManager
+﻿namespace NFC.Application.DependencyManager
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDependencyRegister
     {
         /// <summary>

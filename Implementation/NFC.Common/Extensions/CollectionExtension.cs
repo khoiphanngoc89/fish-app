@@ -2,6 +2,9 @@
 
 namespace NFC.Common.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class CollectionExtension
     {
         /// <summary>

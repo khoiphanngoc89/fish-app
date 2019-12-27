@@ -1,18 +1,27 @@
-﻿using NFC.Common;
-using NFC.Domain.Entities;
+﻿using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Infrastructure.Repositories
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Log}" />
     public interface IAppLogRepository : IGenericRepository<long, Log>
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.Log}" />
+    /// <seealso cref="NFC.Infrastructure.Repositories.IAppLogRepository" />
     public class LogRepository : GenericRepositoryBase<long, Log>, IAppLogRepository
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogRepository"/> class.
+        /// </summary>
+        /// <param name="repository">The data access object.</param>
         public LogRepository(IRepository repository) : base(repository)
         {
         }
