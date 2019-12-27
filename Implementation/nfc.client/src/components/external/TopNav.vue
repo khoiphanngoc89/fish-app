@@ -67,7 +67,6 @@ export default {
     loadDataAsync: async function() {
       let self = this;
       self.storage.menus = await self.menuConnector.getAllAsync();
-      debugger
     }
   }
   
