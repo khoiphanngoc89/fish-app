@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Data.Common;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -39,40 +36,9 @@ namespace NFC.WebAPI.Controllers
         /// <typeparam name="TResult"></typeparam>
         /// <param name="action">The action.</param>
         /// <returns></returns>
-        protected static async Task<IResponseResult<object>> ExecuteAction<TResult>(Expression<Func<TResult>> action)
+        protected static async Task<IResponseResult<object>> ExecuteAction<TResult>(Func<TResult> action)
         {
-            var response = new ResponseResult<object>();
-
-            var _output = await Task.Factory.StartNew(async () =>
-            {
-                var expr = Expression.Invoke(action);
-                Expression<Func<TResult>> lambda = Expression.Lambda<Func<TResult>>(expr);
-                Func<TResult> compiled = lambda.Compile();
-                var output = compiled.Invoke();
-                return output;
-
-            }).ConfigureAwait(false);
-
-            if (!Equals(_output.Exception, null) && _output.Exception.InnerExceptions.Any())
-            {
-                // aa
-                if (_output.Exception.InnerException is SqlException)
-                {
-                    response.Errors.Add((_output.Exception.InnerException as SqlException).Number);
-                }
-                else
-                {
-                    response.Errors.Add(_output.Exception.Message);
-                }
-            }
-            else
-            {
-                response.Result = _output.Result;
-            }
-
-
-
-            return response;
+            return await Task.Run(() => OnExecuteAction(action));
         }
 
         /// <summary>
@@ -80,19 +46,23 @@ namespace NFC.WebAPI.Controllers
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns></returns>
-        protected static async Task<IResponseResult<object>> ExecuteAction(Expression<Action> action)
+        protected static async Task<IResponseResult<object>> ExecuteAction(Action action)
+        {
+            return await Task.Run(() => OnExecuteAction(action));
+        }
+
+        /// <summary>
+        /// Called when [execute action].
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        private static IResponseResult<object> OnExecuteAction(Action action)
         {
             var response = new ResponseResult<object>();
             try
             {
-                await Task.Factory.StartNew(() =>
-                {
-                    var expr = Expression.Invoke(action);
-                    Expression<Action> lambda = Expression.Lambda<Action>(expr);
-                    var compiled = lambda.Compile();
-                    compiled.Invoke();
-                });
-
+                action();
             }
             catch (DbException ex)
             {
@@ -104,7 +74,31 @@ namespace NFC.WebAPI.Controllers
             }
 
             return response;
+        }
 
+        /// <summary>
+        /// Called when [execute action].
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        private static IResponseResult<object> OnExecuteAction<TResult>(Func<TResult> action)
+        {
+            var response = new ResponseResult<object>();
+            try
+            {
+                response.Result = action();
+            }
+            catch (DbException ex)
+            {
+                response.Errors.Add(ex.ErrorCode);
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add(ex.Message);
+            }
+
+            return response;
         }
     }
 }
