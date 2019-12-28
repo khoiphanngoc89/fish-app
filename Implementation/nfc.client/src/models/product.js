@@ -14,9 +14,16 @@ export default {
     },
     initGeneral: function() {
         return {
-            pageNumber: 1,
-            pageSize: 30,
-            getLatest: false
+            total: 200,
+            number: 1,
+            size: 30,
+            getLatest: false,
+            order: '',
+            isSimple: false,
+            isRounded: true,
+            prevIcon: 'chevron-left',
+            nextIcon: 'chevron-right'
+
         }
     },
     initStorage: function() {
