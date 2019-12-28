@@ -11,15 +11,15 @@
       </template>
       <template slot="start">
         <template v-for="menu in storage.menus">
-          <b-navbar-item v-if="menu.menuType > 1 && !menu.hasSub" :key="menu.id" tag="router-link" :to="{ path: menu.url }">
+          <b-navbar-item v-if="isVisible(general.menu, menu.menuType, menu.hasSub)" :key="menu.id" tag="router-link" :to="{ path: menu.url }">
             <template v-if="menu.image">
               <b-icon :icon="menu.image" />
               <embed/>
             </template>
-            <span :class="{'home-nav': menu.name =='Home' }">{{ menu.name }}</span>
+            <span :class="{'home-nav': isVisibleIcon(menu.name) }">{{ menu.name }}</span>
           </b-navbar-item>
           
-          <b-navbar-dropdown :label="menu.name" :key="menu.id" v-if="menu.menuType > 1 && menu.hasSub" >
+          <b-navbar-dropdown :label="menu.name" :key="menu.id" v-if="isVisible(general.submenu, menu.menuType, menu.hasSub)" >
             <b-navbar-item  v-for="submenu in menu.subMenus" :key="submenu.id" :href="submenu.url"> {{ submenu.name }}</b-navbar-item>
           </b-navbar-dropdown>
         </template>
@@ -51,12 +51,13 @@
 
 <script>
 import { MENU_CONNECTOR } from '@/connectors/connect-types.js';
-import vm from '@/models/menu';
+import vm, { MENU, SUBMENU } from '@/models/menu';
 export default {
   inject: [MENU_CONNECTOR],
   data() {
     return {
-      storage: vm.initStorage()
+      storage: vm.initStorage(),
+      general: vm.initGeneral()
     }
   },
   async created() {
@@ -67,6 +68,18 @@ export default {
     loadDataAsync: async function() {
       let self = this;
       self.storage.menus = await self.menuConnector.getAllAsync();
+    },
+    isVisible: function(type, menuType, hasSubMenu) {
+      let result = menuType > 1;
+      switch(type) {
+        case MENU:
+          return result && !hasSubMenu;
+        case SUBMENU:
+          return result && hasSubMenu;
+      }
+    },
+    isVisibleIcon: function(name) {
+      return name.toLowerCase() == 'home';
     }
   }
   
