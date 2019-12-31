@@ -7,7 +7,6 @@ using NFC.Api.Config.Automapper;
 using NFC.Api.Config.Cors;
 using NFC.Api.Config.Swagger;
 using NFC.Api.Config.Validators;
-using NFC.Application.Context;
 using NFC.Application.DependencyManager;
 
 namespace NFC.WebAPI
