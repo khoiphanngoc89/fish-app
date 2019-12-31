@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using NFC.Api.Config.Automapper;
 using NFC.Api.Config.Cors;
-using NFC.Api.Config.Jwt;
 using NFC.Api.Config.Swagger;
 using NFC.Api.Config.Validators;
+using NFC.Application.Context;
 using NFC.Application.DependencyManager;
 
 namespace NFC.WebAPI
@@ -80,6 +73,7 @@ namespace NFC.WebAPI
                 endpoints.MapControllers();
             });
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }

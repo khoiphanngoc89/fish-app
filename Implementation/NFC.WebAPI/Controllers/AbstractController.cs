@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.Common;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -64,9 +64,9 @@ namespace NFC.WebAPI.Controllers
             {
                 action();
             }
-            catch (DbException ex)
+            catch (SqlException ex)
             {
-                response.Errors.Add(ex.ErrorCode);
+                response.Errors.Add(ex.Number);
             }
             catch (Exception ex)
             {
@@ -89,9 +89,9 @@ namespace NFC.WebAPI.Controllers
             {
                 response.Result = action();
             }
-            catch (DbException ex)
+            catch (SqlException ex)
             {
-                response.Errors.Add(ex.ErrorCode);
+                response.Errors.Add(ex.Number);
             }
             catch (Exception ex)
             {

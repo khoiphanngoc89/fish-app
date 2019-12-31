@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using NFC.Common.Constants;
 using NFC.Persistence.Services;
@@ -11,8 +12,17 @@ namespace NFC.WebAPI.Controllers
     [Route(ApiConst.RootRoute)]
     public class MenuController : AbstractController
     {
+        /// <summary>
+        /// The mnenu service
+        /// </summary>
         private readonly IMenuService mnenuService;
 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MenuController"/> class.
+        /// </summary>
+        /// <param name="mnenuService">The mnenu service.</param>
+        /// <param name="mapper">The mapper.</param>
         public MenuController(IMenuService mnenuService, IMapper mapper) : base(mapper)
         {
             this.mnenuService = mnenuService;
