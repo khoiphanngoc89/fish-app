@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,29 @@ namespace NFC.WebAPI.Controllers
         protected AbstractController(IMapper mapper)
         {
             this.mapper = mapper;
+        }
+
+        protected bool UploadFile(byte[] content, string filePath)
+        {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
+            var directory = Path.GetDirectoryName(fullPath);
+            if(!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            try
+            {
+                using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(content, 0, content.Length);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
