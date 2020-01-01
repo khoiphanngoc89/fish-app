@@ -1,4 +1,4 @@
-template>
+<template>
   <section>
     <div v-if="storage.products.length" class="row">
       <div v-for="product in storage.products" :key="product.id" class="col-lg-4 col-md-6 mb-4">
@@ -23,29 +23,27 @@ template>
       </div>
     </div>
     <hr>
-    <!-- <b-pagination
-            :total="total"
-            :current.sync="current"
-            :range-before="rangeBefore"
-            :range-after="rangeAfter"
-            :order="order"
-            :size="size"
-            :simple="isSimple"
-            :rounded="isRounded"
-            :per-page="perPage"
-            :icon-prev="prevIcon"
-            :icon-next="nextIcon"
-            aria-next-label="Next page"
-            aria-previous-label="Previous page"
-            aria-page-label="Page"
-            aria-current-label="Current page">
-    </b-pagination> -->
+    <b-pagination
+            :total="general.total"
+            :current.sync="general.number"
+            :rounded="true"
+            :per-page="general.size"
+            :icon-prev="constvm.table.prevIcon"
+            :icon-next="constvm.table.nextIcon"
+            :aria-next-label="constvm.table.nextPage"
+            :aria-previous-label="constvm.table.previousPage"
+            :aria-page-label="constvm.table.page"
+            :aria-current-label="constvm.table.currentPage">
+    </b-pagination>
   </section>
 </template>
 
 <script>
-import vm from '@/models/product.js';
-import { PRODUCT_CONNECTOR } from '@/connectors/connect-types.js'
+import vm from '@/models/product';
+import * as constvm from '@/models/constant';
+import { PRODUCT_CONNECTOR } from '@/connectors/connect-types';
+import { HOME_PAGE_SIZE } from '@/utils/constants/external.constant';
+import { SPLASH } from '@/utils/constants/shared.constant'
 
 export default {
   inject: [PRODUCT_CONNECTOR],
@@ -53,17 +51,18 @@ export default {
     return {
       model: vm.initModel(),
       storage: vm.initStorage(),
-      general: vm.initGeneral()
+      general: vm.initGeneral(),
+      const: constvm.constant
     } 
   },
   async mounted() {
     let self = this;
-    if(self.isHome) self.general.pageSize = 6;
+    if(self.isHome) self.general.pageSize = HOME_PAGE_SIZE;
     await self.loadDataAsync();
   },
   computed: {
     isHome() {
-      return window.location.pathname == '/';
+      return window.location.pathname === SPLASH;
     }
   },
   methods: {
