@@ -6,8 +6,6 @@ namespace NFC.Api.Config.Automapper
     {
         public MappingProfile()
         {
-            //CreateMap<ProductRequest, Product>().ReverseMap();
-            //CreateMap<RefreshTokenRequest, Authentication>().ReverseMap();
         }
     }
 }

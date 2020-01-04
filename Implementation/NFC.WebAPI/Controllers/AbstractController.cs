@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NFC.Application.Contracts;
+using NFC.Common.Constants;
 
 namespace NFC.WebAPI.Controllers
 {
@@ -29,6 +30,16 @@ namespace NFC.WebAPI.Controllers
         protected AbstractController(IMapper mapper)
         {
             this.mapper = mapper;
+        }
+
+        /// <summary>
+        /// Builds the upload directory.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
+        protected string BuildUploadDirectory(string fileName)
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Const.RootPath, fileName);
         }
 
         protected bool UploadFile(byte[] content, string filePath)
