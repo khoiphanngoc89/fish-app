@@ -9,7 +9,7 @@ GO
 
 CREATE TABLE [Category] (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
-	[Name] NVARCHAR(50) UNIQUE,
+	[Name] NVARCHAR(50) UNIQUE NOT NULL,
 	[Description] NVARCHAR(255) NULL,
 	[IsActive] BIT NULL,
 	[CreationDate] DATETIME2(7) NOT NULL,
@@ -26,12 +26,12 @@ GO
 CREATE TABLE [Product](
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
 	[CategoryId] BIGINT NULL,
-	[Name] NVARCHAR(50) UNIQUE,
+	[Name] NVARCHAR(50) UNIQUE NOT NULL,
 	[Description] NVARCHAR(255) NULL,
 	[Quality] INT NULL DEFAULT 0,
-	[IsActive] BIT NULL,
-	[Price] FLOAT(53) NOT NULL,
-	[PromotionPrice] DECIMAL(10,2) NULL,
+	[IsActive] BIT DEFAULT 0,
+	[Price] FLOAT(53) DEFAULT 0,
+	[PromotionPrice] FLOAT(53) DEFAULT 0,
 	[SeoPageTitle] VARCHAR(255) NULL,
 	[SeoAlias] VARCHAR(150) NULL,
 	[SeoKeywords] VARCHAR(50),
