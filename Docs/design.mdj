@@ -4314,7 +4314,95 @@
 					"_parent": {
 						"$ref": "AAAAAAFvb7DNJ5XEVuE="
 					},
-					"name": "ERDDiagram1"
+					"name": "ERDDiagram1",
+					"ownedViews": [
+						{
+							"_type": "ERDEntityView",
+							"_id": "AAAAAAFvb8fQJ5XqVWA=",
+							"_parent": {
+								"$ref": "AAAAAAFvb7DNJ5XF0TU="
+							},
+							"model": {
+								"$ref": "AAAAAAFvb8fQJpXohb4="
+							},
+							"subViews": [
+								{
+									"_type": "LabelView",
+									"_id": "AAAAAAFvb8fQJ5Xrn9A=",
+									"_parent": {
+										"$ref": "AAAAAAFvb8fQJ5XqVWA="
+									},
+									"font": "Arial;13;1",
+									"left": 256,
+									"top": 677,
+									"width": 85.61181640625,
+									"height": 13,
+									"text": "Bill"
+								},
+								{
+									"_type": "ERDColumnCompartmentView",
+									"_id": "AAAAAAFvb8fQJ5XsUug=",
+									"_parent": {
+										"$ref": "AAAAAAFvb8fQJ5XqVWA="
+									},
+									"model": {
+										"$ref": "AAAAAAFvb8fQJpXohb4="
+									},
+									"subViews": [
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFvb8gt+JX4lkU=",
+											"_parent": {
+												"$ref": "AAAAAAFvb8fQJ5XsUug="
+											},
+											"model": {
+												"$ref": "AAAAAAFvb8gttpX1f5Y="
+											},
+											"font": "Arial;13;0",
+											"left": 261,
+											"top": 700,
+											"width": 75.61181640625,
+											"height": 13
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 256,
+									"top": 695,
+									"width": 85.61181640625,
+									"height": 23
+								}
+							],
+							"font": "Arial;13;0",
+							"left": 256,
+							"top": 672,
+							"width": 85.61181640625,
+							"height": 46,
+							"nameLabel": {
+								"$ref": "AAAAAAFvb8fQJ5Xrn9A="
+							},
+							"columnCompartment": {
+								"$ref": "AAAAAAFvb8fQJ5XsUug="
+							}
+						}
+					]
+				},
+				{
+					"_type": "ERDEntity",
+					"_id": "AAAAAAFvb8fQJpXohb4=",
+					"_parent": {
+						"$ref": "AAAAAAFvb7DNJ5XEVuE="
+					},
+					"name": "Bill",
+					"columns": [
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFvb8gttpX1f5Y=",
+							"_parent": {
+								"$ref": "AAAAAAFvb8fQJpXohb4="
+							},
+							"name": "Column1"
+						}
+					]
 				}
 			]
 		}
