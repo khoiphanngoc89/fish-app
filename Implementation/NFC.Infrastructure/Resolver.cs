@@ -29,7 +29,7 @@ namespace NFC.Infrastructure
             register.AddTransient<IProductRepository, ProductRepository>();
             register.AddSingleton<IDbFactory, DbFactory>();
             register.AddTransient<IRepository, Repository>();
-            
+
         }
     }
 }

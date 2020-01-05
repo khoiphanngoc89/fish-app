@@ -21,7 +21,7 @@ namespace NFC.Infrastructure.SharedKernel
     /// <summary>
     /// Provides the connect to db.
     /// </summary>
-    /// <seealso cref="NFC.Persistence.IDbFactory" />
+    /// <seealso cref="NFC.Infrastructure.SharedKernel.IDbFactory" />
     /// <seealso cref="System.IDisposable" />
     public class DbFactory : IDbFactory, IDisposable
     {

@@ -6,8 +6,7 @@ namespace NFC.Domain.Entities
     /// <summary>
     /// Defines the member.
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int64}" />
-    /// <seealso cref="NFC.Common.Shared.IActiveMetadata" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class Member : DomainEntity<long>, IActiveMetadata
     {
         /// <summary>

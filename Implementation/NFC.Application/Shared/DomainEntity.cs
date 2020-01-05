@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Application.Shared
 {
@@ -8,7 +6,6 @@ namespace NFC.Application.Shared
     /// Defines the domain entity.
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
-    /// <seealso cref="NFC.Common.IDomainEntity{TKey}" />
     public abstract class DomainEntity<TKey> : IDomainEntity<TKey>
         where TKey : IComparable
     {

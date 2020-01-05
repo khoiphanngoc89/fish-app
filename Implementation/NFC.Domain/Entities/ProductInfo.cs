@@ -1,13 +1,10 @@
-﻿using NFC.Application.Shared;
-
-namespace NFC.Domain.Entities
+﻿namespace NFC.Domain.Entities
 {
     /// <summary>
     /// Defines product info.
     /// </summary>
     /// <seealso cref="NFC.Domain.Entities.Product" />
-    /// <seealso cref="NFC.Common.Shared.IDomainEntity{System.Int64}" />
-    public class ProductInfo : Product, IDomainEntity<long>
+    public class ProductInfo : Product
     {
         /// <summary>
         /// Gets or sets the content of the image.

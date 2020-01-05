@@ -6,7 +6,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Log}" />
     public interface IAppLogRepository : IGenericRepository<long, Log>
     {
     }
@@ -14,7 +13,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.Log}" />
     /// <seealso cref="NFC.Infrastructure.Repositories.IAppLogRepository" />
     public class LogRepository : GenericRepositoryBase<long, Log>, IAppLogRepository
     {
@@ -27,5 +25,5 @@ namespace NFC.Infrastructure.Repositories
         }
     }
 
-    
+
 }

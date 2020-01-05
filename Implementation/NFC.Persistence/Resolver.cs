@@ -4,6 +4,10 @@ using System.ComponentModel.Composition;
 
 namespace NFC.Persistence
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.DependencyManager.IDependencyResolver" />
     [Export(typeof(IDependencyResolver))]
     public class Resolver : IDependencyResolver
     {
@@ -11,12 +15,10 @@ namespace NFC.Persistence
         /// Called when [initialize].
         /// </summary>
         /// <param name="register">The register.</param>
-        /// <exception cref="NotImplementedException"></exception>
         public void OnInitialize(IDependencyRegister register)
         {
             register.AddTransient<IProductService, ProductService>();
             register.AddTransient<IMenuService, MenuService>();
-
         }
     }
 }

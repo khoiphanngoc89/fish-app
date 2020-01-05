@@ -5,7 +5,6 @@ namespace NFC.Domain.Entities
     /// <summary>
     /// Defines application log.
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int64}" />
     public class Log : DomainEntity<long>
     {
         /// <summary>

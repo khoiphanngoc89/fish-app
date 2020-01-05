@@ -57,7 +57,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets all by paging.
         /// </summary>
-        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -68,7 +67,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// Gets all by paging.
         /// </summary>
         /// <param name="storeName">Name of the store.</param>
-        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -80,7 +78,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="storeName">Name of the store.</param>
-        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -107,7 +104,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
-        IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T: class;
+        IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class;
 
         /// <summary>
         /// Remove an instance.
@@ -197,7 +194,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="storedName">Name of the stored.</param>
-        /// <param name="parmas">The parmas.</param>
         /// <returns></returns>
         IEnumerable<T> Select<T>(string storedName);
 

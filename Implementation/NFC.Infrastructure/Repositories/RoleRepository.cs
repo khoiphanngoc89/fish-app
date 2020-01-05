@@ -6,7 +6,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Role}" />
     public interface IRoleRepository : IGenericRepository<long, Role>
     {
     }
@@ -14,7 +13,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.Role}" />
     /// <seealso cref="NFC.Infrastructure.Repositories.IRoleRepository" />
     public class RoleRepository : GenericRepositoryBase<long, Role>, IRoleRepository
     {

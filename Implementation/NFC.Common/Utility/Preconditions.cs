@@ -16,7 +16,7 @@ namespace NFC.Common.Utility
         /// <exception cref="Exception"></exception>
         public static void CheckNull<T>(T model, string description)
         {
-            if(Equals(model, null))
+            if (Equals(model, null))
             {
                 throw new Exception($"{description} cannot be null");
             }

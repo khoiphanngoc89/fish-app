@@ -11,7 +11,6 @@ namespace NFC.Persistence.Services
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Persistence.Services.IService{System.Int32, NFC.Persistence.Contracts.MenuDto}" />
     public interface IMenuService : IService<int, MenuDto>
     {
 
@@ -72,9 +71,9 @@ namespace NFC.Persistence.Services
         public IEnumerable<MenuDto> GetAll()
         {
             var menus = this.menuRepository.GetAll();
-            foreach(var menu in menus)
+            foreach (var menu in menus)
             {
-                if(!menu.HasSub)
+                if (!menu.HasSub)
                 {
                     continue;
                 }
@@ -91,8 +90,9 @@ namespace NFC.Persistence.Services
         /// </summary>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLastest">if set to <c>true</c> [get lastest].</param>
+        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<MenuDto> GetAllPaging(int pageNumber = 1, int pageSize = 30, bool getLatest = false)
         {
             throw new NotImplementedException();

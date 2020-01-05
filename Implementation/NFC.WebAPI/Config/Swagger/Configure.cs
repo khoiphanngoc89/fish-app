@@ -1,20 +1,25 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NFC.Api.Config.Swagger
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class Configure
     {
+        /// <summary>
+        /// Swaggers the configuration.
+        /// </summary>
+        /// <param name="services">The services.</param>
         public static void SwaggerConfig(this IServiceCollection services)
         {
             services.AddOpenApiDocument(config =>
             {
-                config.PostProcess = document => {
+                config.PostProcess = document =>
+                {
                     document.Info.Version = "v1";
                     document.Info.Title = "NFC";
                     document.Info.Description = "Ecommerce ASP.NET Core web API";
@@ -30,7 +35,7 @@ namespace NFC.Api.Config.Swagger
 
                 config.OperationProcessors.Add(
                     new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-               
+
             });
         }
     }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using NFC.Common.Constants;
 using NFC.Persistence.Services;
@@ -8,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace NFC.WebAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.WebAPI.Controllers.AbstractController" />
     [ApiController]
     [Route(ApiConst.RootRoute)]
     public class MenuController : AbstractController

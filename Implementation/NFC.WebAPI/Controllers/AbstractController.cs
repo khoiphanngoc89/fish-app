@@ -1,11 +1,11 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.IO;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NFC.Application.Contracts;
 using NFC.Common.Constants;
+using System;
+using System.Data.SqlClient;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace NFC.WebAPI.Controllers
 {
@@ -39,14 +39,20 @@ namespace NFC.WebAPI.Controllers
         /// <returns></returns>
         protected string BuildUploadDirectory(string fileName)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Const.RootPath, fileName);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Const.RootPath, Const.Upload, fileName);
         }
 
+        /// <summary>
+        /// Uploads the file.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <returns></returns>
         protected bool UploadFile(byte[] content, string filePath)
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
             var directory = Path.GetDirectoryName(fullPath);
-            if(!Directory.Exists(directory))
+            if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
@@ -89,7 +95,6 @@ namespace NFC.WebAPI.Controllers
         /// <summary>
         /// Called when [execute action].
         /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="action">The action.</param>
         /// <returns></returns>
         private static IResponseResult<object> OnExecuteAction(Action action)

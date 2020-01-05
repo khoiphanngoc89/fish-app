@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace NFC.Persistence.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IProductService : IService<long, ProductDto>
     {
         /// <summary>
@@ -17,6 +20,11 @@ namespace NFC.Persistence.Services
         IEnumerable<ProductDto> GetHighlight();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Persistence.Services.ServiceBase" />
+    /// <seealso cref="NFC.Persistence.Services.IProductService" />
     public class ProductService : ServiceBase, IProductService
     {
         /// <summary>

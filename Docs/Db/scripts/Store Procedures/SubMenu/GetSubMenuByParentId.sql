@@ -9,6 +9,9 @@
 -- This block of comments will not be included in
 -- the definition of the procedure.
 -- ================================================
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('[GetSubMenuByParentId]'))
+   EXEC('CREATE PROCEDURE [GetSubMenuByParentId] AS BEGIN SET NOCOUNT ON; END')
+   
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

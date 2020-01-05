@@ -3,9 +3,9 @@
 namespace NFC.Domain.Entities
 {
     /// <summary>
-    /// Defines the sub menu.
+    /// 
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int32}" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class SubMenu : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>

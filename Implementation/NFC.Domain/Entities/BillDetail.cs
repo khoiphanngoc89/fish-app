@@ -23,6 +23,12 @@ namespace NFC.Domain.Entities
         /// </value>
         public int Quality { get; set; }
 
+        /// <summary>
+        /// Gets or sets the price.
+        /// </summary>
+        /// <value>
+        /// The price.
+        /// </value>
         public double Price { get; set; }
 
         /// <summary>

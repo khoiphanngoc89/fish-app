@@ -6,8 +6,7 @@ namespace NFC.Domain.Entities
     /// <summary>
     /// Defines the menu.
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int32}" />
-    /// <seealso cref="NFC.Common.Shared.IActiveMetadata" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class Menu : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>
@@ -16,7 +15,7 @@ namespace NFC.Domain.Entities
         /// <value>
         /// The name.
         /// </value>
-        public string Name {get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the URL.

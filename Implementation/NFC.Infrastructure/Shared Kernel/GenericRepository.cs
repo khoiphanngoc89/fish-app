@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Newtonsoft.Json;
+using NFC.Application.Shared;
 using NFC.Common.Constants;
 using NFC.Common.Extensions;
 using System;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using NFC.Application.Shared;
 
 namespace NFC.Infrastructure.SharedKernel
 {
@@ -109,7 +109,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets all by paging.
         /// </summary>
-        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -159,7 +158,7 @@ namespace NFC.Infrastructure.SharedKernel
             return this.Select<TEntity>($"GetAll{this.tblName}ByPagingSearch", this.BuildPagingSearchParams(name, pageNumber, pageSize, getLatest));
         }
 
-        
+
 
         /// <summary>
         /// Gets the by by paging search.
@@ -392,7 +391,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Builds the paging parameters.
         /// </summary>
-        /// <param name="name">The name.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
@@ -589,6 +587,9 @@ namespace NFC.Infrastructure.SharedKernel
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Repository"/> class.
+        /// </summary>
         ~Repository()
         {
             this.Dispose(false);

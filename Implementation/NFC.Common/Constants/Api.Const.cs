@@ -1,5 +1,8 @@
 ﻿namespace NFC.Common.Constants
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ApiConst
     {
         /// <summary>

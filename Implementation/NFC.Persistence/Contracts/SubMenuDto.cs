@@ -5,8 +5,6 @@ namespace NFC.Persistence.Contracts
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Application.Shared.DomainEntity{System.Int32}" />
-    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class SubMenuDto : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>

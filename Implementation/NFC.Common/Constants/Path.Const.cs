@@ -10,5 +10,10 @@
         /// </summary>
         public const string RootPath = "wwwroot";
 
+        /// <summary>
+        /// The upload
+        /// </summary>
+        public const string Upload = "Upload";
+
     }
 }

@@ -6,7 +6,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Member}" />
     public interface IMemberRepository : IGenericRepository<long, Member>
     {
     }
@@ -14,7 +13,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.Member}" />
     /// <seealso cref="NFC.Infrastructure.Repositories.IMemberRepository" />
     public class MemberRepository : GenericRepositoryBase<long, Member>, IMemberRepository
     {

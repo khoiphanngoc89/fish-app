@@ -11,10 +11,11 @@ namespace NFC.Api.Config.Jwt
     public static class Configure
     {
         /// <summary>
-        /// Configures jwt
+        /// JWTs the configuration.
         /// </summary>
         /// <param name="services">The services.</param>
-        /// <param name="issuer">The issure</param>
+        /// <param name="issuer">The issuer.</param>
+        /// <param name="secretKey">The secret key.</param>
         public static void JwtConfig(this IServiceCollection services, string issuer, string secretKey)
         {
             var tokenValidationParamters = new TokenValidationParameters

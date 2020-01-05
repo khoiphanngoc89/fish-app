@@ -9,8 +9,8 @@ namespace NFC.Persistence.Services
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     public interface IService<TKey, TModel>
-        where TKey: IComparable
-        where TModel: class
+        where TKey : IComparable
+        where TModel : class
     {
         /// <summary>
         /// Adds the specified model.

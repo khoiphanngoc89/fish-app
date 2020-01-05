@@ -7,7 +7,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int32, NFC.Domain.Entities.SubMenu}" />
     public interface ISubMenuRepository : IGenericRepository<int, SubMenu>
     {
         /// <summary>
@@ -21,7 +20,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int32, NFC.Domain.Entities.SubMenu}" />
     /// <seealso cref="NFC.Infrastructure.Repositories.ISubMenuRepository" />
     public class SubMenuRepository : GenericRepositoryBase<int, SubMenu>, ISubMenuRepository
     {

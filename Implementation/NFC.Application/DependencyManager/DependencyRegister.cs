@@ -8,7 +8,7 @@ namespace NFC.Application.DependencyManager
     /// <seealso cref="NFC.Application.DependencyManager.IDependencyRegister" />
     public class DependencyRegister : IDependencyRegister
     {
-        // <summary>
+        /// <summary>
         /// The services.
         /// </summary>
         private readonly IServiceCollection services;
