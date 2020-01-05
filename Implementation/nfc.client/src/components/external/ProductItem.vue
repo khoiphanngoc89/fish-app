@@ -68,11 +68,9 @@ export default {
   methods: {
     async loadDataAsync() {
       let self = this;
-      debugger
+      
       self.storage.products =
-        await self.productConnector.getAllAsync(self.general);
-        
-        
+        await self.productConnector.getAllAsync(self.general);        
     }
   }
 };

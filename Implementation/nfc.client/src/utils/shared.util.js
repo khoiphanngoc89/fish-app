@@ -21,7 +21,6 @@ export default {
         };
     },
     getAPIData: function(data) {
-        debugger
         if (data.hasError) throw Error(data.errors[0]);
         return data.result;
     },

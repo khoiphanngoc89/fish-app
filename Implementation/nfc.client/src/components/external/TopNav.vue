@@ -72,7 +72,6 @@ export default {
       self.storage.menus = await self.menuConnector.getAllAsync();
     },
     isVisible: function(type, menuType, hasSubMenu) {
-      debugger
       let result = menuType > 0;
       switch(type) {
         case MENU:
