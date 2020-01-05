@@ -29,7 +29,7 @@ namespace NFC.Api.Config.Automapper
                 foreach (var file in files)
                 {
                     // https://stackoverflow.com/questions/18483354/get-assembly-of-program-from-a-dll
-                    var assembly = Assembly.Load(file);
+                    var assembly = Assembly.LoadFrom(file);
                     var types = assembly.GetTypes().Where(x => x.GetTypeInfo().IsClass && x.IsAssignableFrom(x) && x.GetTypeInfo().BaseType == typeof(Profile)).ToList();
                     foreach (var type in types)
                     {

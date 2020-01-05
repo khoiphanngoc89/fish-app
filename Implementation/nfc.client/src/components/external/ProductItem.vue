@@ -28,12 +28,12 @@
             :current.sync="general.number"
             :rounded="true"
             :per-page="general.size"
-            :icon-prev="constvm.table.prevIcon"
-            :icon-next="constvm.table.nextIcon"
-            :aria-next-label="constvm.table.nextPage"
-            :aria-previous-label="constvm.table.previousPage"
-            :aria-page-label="constvm.table.page"
-            :aria-current-label="constvm.table.currentPage">
+            :icon-prev="constant.table.prevIcon"
+            :icon-next="constant.table.nextIcon"
+            :aria-next-constant="constant.table.nextPage"
+            :aria-previous-label="constant.table.previousPage"
+            :aria-page-label="constant.table.page"
+            :aria-current-label="constant.table.currentPage">
     </b-pagination>
   </section>
 </template>
@@ -52,7 +52,7 @@ export default {
       model: vm.initModel(),
       storage: vm.initStorage(),
       general: vm.initGeneral(),
-      const: constvm.constant
+      constant: constvm.constant
     } 
   },
   async mounted() {
@@ -68,8 +68,10 @@ export default {
   methods: {
     async loadDataAsync() {
       let self = this;
+      debugger
       self.storage.products =
         await self.productConnector.getAllAsync(self.general);
+        
         
     }
   }

@@ -18,6 +18,14 @@ namespace NFC.Domain.Entities
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        public string Code { get; set; }
+
+        /// <summary>
         /// Gets or sets the URL.
         /// </summary>
         /// <value>
@@ -32,6 +40,14 @@ namespace NFC.Domain.Entities
         /// The image.
         /// </value>
         public string Image { get; set; }
+
+        /// <summary>
+        /// Gets or sets the icon.
+        /// </summary>
+        /// <value>
+        /// The icon.
+        /// </value>
+        public string Icon { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the menu.

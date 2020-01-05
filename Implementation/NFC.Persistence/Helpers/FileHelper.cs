@@ -13,9 +13,9 @@ namespace NFC.Persistence.Helpers
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public static string GetImagePath(string path)
+        public static string GetLogoPath(string path)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            return path;
         }
     }
 }

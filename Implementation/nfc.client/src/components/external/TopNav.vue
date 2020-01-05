@@ -2,18 +2,20 @@
   <div class="container">
     <b-navbar id="top-nav">
       <template slot="brand">
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-            src="@/assets/img/logo.png"
-            alt="Lightweight UI components for Vue.js based on Bulma"
-          />
-        </b-navbar-item>
+        <template v-for="menu in storage.menus">
+          <b-navbar-item v-if="menu.menuType == 0"  :key="menu.id" tag="router-link" :to="{ path: menu.url }">
+            <img
+              :src="`@/${menu.image}`"
+              alt="Lightweight UI components for Vue.js based on Bulma"
+            />
+          </b-navbar-item>
+        </template>
       </template>
       <template slot="start">
         <template v-for="menu in storage.menus">
           <b-navbar-item v-if="isVisible(general.menu, menu.menuType, menu.hasSub)" :key="menu.id" tag="router-link" :to="{ path: menu.url }">
-            <template v-if="menu.image">
-              <b-icon :icon="menu.image" />
+            <template v-if="menu.icon">
+              <b-icon :icon="menu.icon" />
               <embed/>
             </template>
             <span :class="{'home-nav': isVisibleIcon(menu.name) }">{{ menu.name }}</span>
@@ -70,7 +72,8 @@ export default {
       self.storage.menus = await self.menuConnector.getAllAsync();
     },
     isVisible: function(type, menuType, hasSubMenu) {
-      let result = menuType > 1;
+      debugger
+      let result = menuType > 0;
       switch(type) {
         case MENU:
           return result && !hasSubMenu;

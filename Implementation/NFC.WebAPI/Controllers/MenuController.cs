@@ -18,17 +18,17 @@ namespace NFC.WebAPI.Controllers
         /// <summary>
         /// The mnenu service
         /// </summary>
-        private readonly IMenuService mnenuService;
+        private readonly IMenuService menuService;
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuController"/> class.
         /// </summary>
-        /// <param name="mnenuService">The mnenu service.</param>
+        /// <param name="menuService">The menu service.</param>
         /// <param name="mapper">The mapper.</param>
-        public MenuController(IMenuService mnenuService, IMapper mapper) : base(mapper)
+        public MenuController(IMenuService menuService, IMapper mapper) : base(mapper)
         {
-            this.mnenuService = mnenuService;
+            this.menuService = menuService;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace NFC.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
-            var result = await ExecuteAction(() => this.mnenuService.GetAll());
+            var result = await ExecuteAction(() => this.menuService.GetAll());
             return CreatedAtAction(nameof(GetAll), result);
         }
     }

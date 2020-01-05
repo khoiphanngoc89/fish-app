@@ -7,7 +7,7 @@ namespace NFC.WebAPI
     /// <summary>
     /// 
     /// </summary>
-    public static class Program
+    public class Program
     {
         /// <summary>
         /// Defines the entry point of the application.

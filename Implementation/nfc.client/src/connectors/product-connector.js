@@ -5,8 +5,8 @@ export default {
     async getHighlightAsync() {
         return await Connector.get(`${endpoint}/highlight`);
     },
-    async getAllAsync({current, size, getLatest}) {
-        return await Connector.post(`${endpoint}/all/home`, this.buildParams(current, size, getLatest));
+    async getAllAsync({number, size, getLatest}) {
+        return await Connector.post(`${endpoint}/all/home`, this.buildParams(number, size, getLatest));
     },
     async getByIdAsync(id) {
         return await Connector.get(`${endpoint}/${id}`);
