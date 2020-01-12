@@ -1,21 +1,27 @@
 ﻿using NFC.Application.Shared;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace NFC.Domain.Entities
+namespace NFC.Application.Contracts
 {
-    /// <summary>
-    /// Defines application log.
-    /// </summary>
-    /// <seealso cref="NFC.Application.Shared.IAudiEntity" />
-    public class Log : DomainEntity<long>, IAudiEntity
+    public class UploadFileRequest : IAudiEntity
     {
         /// <summary>
-        /// Gets or sets the content.
+        /// Gets or sets the content of the file.
         /// </summary>
         /// <value>
-        /// The content.
+        /// The content of the file.
         /// </value>
-        public string Content { get; set; }
+        public byte[] FileContent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the file.
+        /// </summary>
+        /// <value>
+        /// The name of the file.
+        /// </value>
+        public string FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the creation date.
