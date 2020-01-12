@@ -1,10 +1,12 @@
 ﻿using NFC.Application.Shared;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Application.Contracts
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.Shared.IAudiEntity" />
     public class UploadFileRequest : IAudiEntity
     {
         /// <summary>

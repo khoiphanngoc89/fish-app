@@ -14,10 +14,7 @@ namespace NFC.WebAPI.Controllers
     [Route(ApiConst.RootRoute)]
     public class UploadController : AbstractController
     {
-        /// <summary>
-        /// The product service
-        /// </summary>
-        private readonly IFireBaseService firebaseService;
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductController"/> class.

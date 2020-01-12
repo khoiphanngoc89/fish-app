@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using NFC.Application.Contracts;
 using NFC.Common.Constants;
+using NFC.Persistence.Contracts;
+using NFC.Persistence.Services;
 using System;
 using System.Data.SqlClient;
 using System.IO;
@@ -24,12 +26,18 @@ namespace NFC.WebAPI.Controllers
         protected readonly IMapper mapper;
 
         /// <summary>
+        /// The firebase service
+        /// </summary>
+        private readonly IFireBaseService firebaseService;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AbstractController"/> class.
         /// </summary>
         /// <param name="mapper">The mapper.</param>
-        protected AbstractController(IMapper mapper)
+        protected AbstractController(IFireBaseService firebaseService, IMapper mapper)
         {
             this.mapper = mapper;
+            this.firebaseService = firebaseService;
         }
 
         /// <summary>
@@ -40,6 +48,12 @@ namespace NFC.WebAPI.Controllers
         protected string BuildUploadDirectory(string fileName)
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Const.RootPath, Const.Upload, fileName);
+        }
+
+        protected void Upload(UploadFileRequest request)
+        {
+            var data = this.mapper.Map<UploadFileRequest, UploadFileDto>(request);
+            this.firebaseService.Upload(data);
         }
 
         /// <summary>
