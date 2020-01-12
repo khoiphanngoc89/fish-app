@@ -20,13 +20,13 @@ namespace NFC.WebAPI.Controllers
         /// </summary>
         private readonly IMenuService menuService;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuController"/> class.
         /// </summary>
         /// <param name="menuService">The menu service.</param>
+        /// <param name="fireBaseService">The fire base service.</param>
         /// <param name="mapper">The mapper.</param>
-        public MenuController(IMenuService menuService, IMapper mapper) : base(mapper)
+        public MenuController(IMenuService menuService, IFireBaseService fireBaseService, IMapper mapper) : base(fireBaseService, mapper)
         {
             this.menuService = menuService;
         }

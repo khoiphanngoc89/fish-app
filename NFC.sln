@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{D5C10165-E2BA-4294-BB62-E139A5C35E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFC.WebApi", "Implementation\NFC.WebApi\NFC.WebApi.csproj", "{5956A526-8F49-4A71-AFA3-659001151344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NFC.WebAPI", "Implementation\NFC.WebApi\NFC.WebAPI.csproj", "{5956A526-8F49-4A71-AFA3-659001151344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
