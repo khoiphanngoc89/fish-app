@@ -50,39 +50,14 @@ namespace NFC.WebAPI.Controllers
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Const.RootPath, Const.Upload, fileName);
         }
 
+        /// <summary>
+        /// Uploads the specified request.
+        /// </summary>
+        /// <param name="request">The request.</param>
         protected void Upload(UploadFileRequest request)
         {
             var data = this.mapper.Map<UploadFileRequest, UploadFileDto>(request);
-            this.firebaseService.Upload(data);
-        }
-
-        /// <summary>
-        /// Uploads the file.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        /// <param name="filePath">The file path.</param>
-        /// <returns></returns>
-        protected bool UploadFile(byte[] content, string filePath)
-        {
-            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
-            var directory = Path.GetDirectoryName(fullPath);
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            try
-            {
-                using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(content, 0, content.Length);
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
+            this.firebaseService.UploadFile(data);
         }
 
         /// <summary>

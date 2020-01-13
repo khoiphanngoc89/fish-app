@@ -1,8 +1,8 @@
 ﻿using NFC.Persistence.Context;
 using NFC.Persistence.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using Firebase.Storage;
 
 namespace NFC.Persistence.Services
 {
@@ -15,7 +15,7 @@ namespace NFC.Persistence.Services
         /// Uploads the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
-        void Upload(UploadFileDto model);
+        void UploadFile(UploadFileDto model);
 
         /// <summary>
         /// Registers the specified context.
@@ -27,6 +27,7 @@ namespace NFC.Persistence.Services
     /// <summary>
     /// 
     /// </summary>
+    /// <seealso cref="NFC.Persistence.Services.IFireBaseService" />
     public class FireBaseService : IFireBaseService
     {
         /// <summary>
@@ -40,14 +41,9 @@ namespace NFC.Persistence.Services
         private string bucket = "fish-d3e4f.appspot.com";
 
         /// <summary>
-        /// The authentication scheme
+        /// The upload folder
         /// </summary>
-        private string authScheme = "hachiphan05@gmail.com";
-
-        /// <summary>
-        /// The authentication password
-        /// </summary>
-        private static readonly string authPassword = "@Ubm-09-09-1028";
+        private const string UploadFolder = "Upload";
 
         /// <summary>
         /// Registers the specified context.
@@ -57,12 +53,27 @@ namespace NFC.Persistence.Services
         {
             this.apiKey = context.ApiKey;
             this.bucket = context.Bucket;
-            this.authScheme = context.AuthScheme;
         }
 
-        public void Upload(UploadFileDto model)
+        /// <summary>
+        /// Uploads the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        public void UploadFile(UploadFileDto model)
         {
+            if (model.FileContent.Length == 0 || string.IsNullOrWhiteSpace(model.FileName))
+            {
+                return;
+            }
 
+            using (var stream = new MemoryStream(model.FileContent))
+            {
+                new FirebaseStorage(bucket)
+                            .Child(UploadFolder)
+                            .Child(model.FileName)
+                            .PutAsync(stream);
+            }
         }
     }
 }
+
