@@ -28,7 +28,7 @@ namespace NFC.WebAPI.Controllers
         /// <summary>
         /// The firebase service
         /// </summary>
-        private readonly IFireBaseService firebaseService;
+        protected readonly IFireBaseService firebaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractController"/> class.
@@ -54,7 +54,7 @@ namespace NFC.WebAPI.Controllers
         /// Uploads the specified request.
         /// </summary>
         /// <param name="request">The request.</param>
-        protected void Upload(UploadFileRequest request)
+        protected void UploadFile(UploadFileRequest request)
         {
             var data = this.mapper.Map<UploadFileRequest, UploadFileDto>(request);
             this.firebaseService.UploadFile(data);

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using NFC.Application.Contracts;
+using NFC.Persistence.Contracts;
 
 namespace NFC.Api.Config.Automapper
 {
@@ -13,6 +15,7 @@ namespace NFC.Api.Config.Automapper
         /// </summary>
         public MappingProfile()
         {
+            CreateMap<UploadFileRequest, UploadFileDto>();
         }
     }
 }

@@ -3,6 +3,7 @@ using NFC.Persistence.Contracts;
 using System;
 using System.IO;
 using Firebase.Storage;
+using System.Threading.Tasks;
 
 namespace NFC.Persistence.Services
 {
@@ -15,7 +16,7 @@ namespace NFC.Persistence.Services
         /// Uploads the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
-        void UploadFile(UploadFileDto model);
+        Task UploadFile(UploadFileDto model);
 
         /// <summary>
         /// Registers the specified context.
@@ -59,20 +60,28 @@ namespace NFC.Persistence.Services
         /// Uploads the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
-        public void UploadFile(UploadFileDto model)
+        public Task UploadFile(UploadFileDto model)
         {
             if (model.FileContent.Length == 0 || string.IsNullOrWhiteSpace(model.FileName))
             {
-                return;
+                return new Task(null);
             }
 
-            using (var stream = new MemoryStream(model.FileContent))
+            return Task.Run(async () =>
             {
-                new FirebaseStorage(bucket)
-                            .Child(UploadFolder)
-                            .Child(model.FileName)
-                            .PutAsync(stream);
-            }
+                using (var stream = new MemoryStream(model.FileContent))
+                {
+                    var task = new FirebaseStorage(bucket)
+                                .Child(UploadFolder)
+                                .Child(model.FileName)
+                                .PutAsync(stream);
+
+                    task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+                    var downloadUrl = await task;
+                }
+            });
+
+            
         }
     }
 }
