@@ -21,7 +21,7 @@ GO
 -- Create date: 17-12-2019
 -- Description:	Get sub menu by parent id
 -- =============================================
-CREATE PROCEDURE GetSubMenuByParentId
+ALTER PROCEDURE GetSubMenuByParentId
 	@ParentId INT
 	-- Add the parameters for the stored procedure here
 AS
@@ -33,4 +33,3 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM SubMenu WHERE ParentId = @ParentId
 END
-GO

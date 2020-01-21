@@ -19,7 +19,7 @@ namespace NFC.Persistence
         {
             CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<Menu, MenuDto>()
-                .ForMember(dest => dest.Image, opts => opts.MapFrom(src => FileHelper.GetLogoPath(src.Image)))
+                .ForMember(dest => dest.Image, opts => opts.MapFrom(src => src.Image))
                 .ForMember(dest => dest.SubMenus, opts => opts.MapFrom(src => src.SubMenus.Select(n => new SubMenuDto
                 {
                     Id = n.Id,

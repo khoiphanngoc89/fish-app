@@ -17,9 +17,9 @@ const config = {
   firebase.initializeApp(config);
 
   // initialize cloud firestore through firebase
-  let db = firebase.firestore();
-  db.settings({
+  let instance = firebase.firestore();
+  instance.settings({
       timestampsInSnapshots: true
   });
 
-  export const db;
+  export const instance;

@@ -1,4 +1,4 @@
-INSERT INTO Menu(Code, [Url], [Image], MenuType, IsActive)VALUES('Logo', '/', '\wwwroot\Upload\logo.png', 0, 1);
+INSERT INTO Menu(Code, [Url], [Image], MenuType, IsActive)VALUES('Logo', '/', 'https://firebasestorage.googleapis.com/v0/b/fish-d3e4f.appspot.com/o/Uploads%2Ffavicon.png?alt=media&token=f60eca1b-3c4a-406f-a1a8-a00f1c37dc6e', 0, 1);
 INSERT INTO Menu(Name, Code, [Url], MenuType, HasSub, IsActive)VALUES('Home', 'Home', '/', 1, 0, 1);
 INSERT INTO Menu(Name, Code, [Url], MenuType, HasSub, IsActive)VALUES('Fish', 'Fish', '/Fish', 1, 1, 1);
 INSERT INTO Menu(Name, Code, [Url], MenuType, HasSub, IsActive)VALUES('Policy', 'Policy', '/Policy', 1, 1, 1);

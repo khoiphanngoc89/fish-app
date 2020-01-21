@@ -5,7 +5,7 @@
         <template v-for="menu in storage.menus">
           <b-navbar-item v-if="menu.menuType == 0"  :key="menu.id" tag="router-link" :to="{ path: menu.url }">
             <img
-              :src="`@/${menu.image}`"
+              :src="menu.image"
               alt="Lightweight UI components for Vue.js based on Bulma"
             />
           </b-navbar-item>
