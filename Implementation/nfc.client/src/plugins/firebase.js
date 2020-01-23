@@ -22,4 +22,4 @@ const config = {
       timestampsInSnapshots: true
   });
 
-  export const instance;
+  export default instance;
