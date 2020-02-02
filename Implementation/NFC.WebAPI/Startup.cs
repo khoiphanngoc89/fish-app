@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using NFC.Api.Config.Cors;
 using NFC.Api.Config.Swagger;
 using NFC.Api.Config.Validators;
 using NFC.Application.DependencyManager;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace NFC.WebAPI
 {
@@ -43,13 +45,9 @@ namespace NFC.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-#if DEBUG
-            services.SwaggerConfig();
-#endif
 
-#if !DEBUG
-             services.JwtConfig(this.Configuration["JwtToken:ProdIssuer"]);
-#endif
+            services.SwaggerConfig();
+
             services.AddCors(); // Make sure you call this previous to AddMvc
 
             services.AddMvc(options =>
@@ -60,6 +58,15 @@ namespace NFC.WebAPI
 
             services.InitializeAutoMapper();
             services.InitializeInjection();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "https://localhost:5443/";
+                    options.RequireHttpsMetadata = true;
+                    options.ApiName = "api1";
+                });
         }
 
         /// <summary>
@@ -91,13 +98,19 @@ namespace NFC.WebAPI
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "CatchAll", action = "Index" });
+            });
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            app.UseMvc();
-            app.UseStaticFiles();
+            
         }
     }
 }

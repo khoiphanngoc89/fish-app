@@ -6,5 +6,6 @@ INSERT INTO Menu(Name, Code, [Url], MenuType, HasSub, IsActive)VALUES('About Us'
 
 INSERT INTO SubMenu(ParentId, Name, Code, [Url], IsActive)VALUES(3, 'Beta 1', 'Beta1', '/Fish/Beta1', 1);
 INSERT INTO SubMenu(ParentId, Name, Code, [Url], IsActive)VALUES(3, 'Beta 2', 'Beta2', '/Fish/Beta2', 1);
-
 INSERT INTO SubMenu(ParentId, Name, Code, [Url], IsActive)VALUES(4, 'Return Policy', 'Return', '/Policy/Return', 1);
+
+INSERT INTO Member(FirstName, LastName, Address, Phone, Email, PIN, City, Country)VALUES('admin', 'admin', '5 Test', '6555455344', 'admin@gmail.com', '1234', 'SaiGon', 'VietNam')

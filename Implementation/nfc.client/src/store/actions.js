@@ -2,7 +2,7 @@
 import util from '@/utils/shared.util';
 import storageUtil from '@/utils/localStorage.util';
 import axios from '@/plugins/axios';
-import { 
+import {
     AUTHEN_REQUEST,
     AUTHEN_SUCCESS,
     AUTHEN_ERROR,
@@ -11,7 +11,7 @@ import {
 import {
     SIGNIN_URL,
     REGISTER_URL
-} from '@/utils/constants/url.constant'
+} from '@/utils/constants/url.constant';
 const AUTHORIZATION = 'Authorization';
 
 export default {
@@ -19,7 +19,7 @@ export default {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
             axios.post(SIGNIN_URL, context)
-                .then(({data}) => {
+                .then(({ data }) => {
                     let info = util.getAuthenAPIInfo(data);
                     storageUtil.setAuthStorage(info);
                     axios.defaults.headers.common[AUTHORIZATION] = `Bearer ${info.token}`;
@@ -63,14 +63,14 @@ export default {
                 token: localStorage.getToken()
             }
             axios.post('auth/refresh', parmas)
-                 .then(({data}) => {
-                     let token = util.getAPIData(data);
-                     storageUtil.setToken(token);
-                     resolve(data);
-                 })
-                 .catch(error => {
-                     reject(error)
-                 })
+                .then(({ data }) => {
+                    let token = util.getAPIData(data);
+                    storageUtil.setToken(token);
+                    resolve(data);
+                })
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 }
