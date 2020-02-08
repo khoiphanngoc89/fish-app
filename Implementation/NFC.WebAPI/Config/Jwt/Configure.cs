@@ -31,13 +31,12 @@ namespace NFC.Api.Config.Jwt
             };
 
             services.AddSingleton(tokenValidationParamters);
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                 .AddJwtBearer(options =>
-                 {
-                     options.SaveToken = true;
-                     options.TokenValidationParameters = tokenValidationParamters;
-                 });
+                    .AddJwtBearer(options =>
+                    {
+                        options.SaveToken = true;
+                        options.TokenValidationParameters = tokenValidationParamters;
+                    });
         }
     }
 }

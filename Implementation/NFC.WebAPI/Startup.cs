@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NFC.Api.Config.Automapper;
 using NFC.Api.Config.Cors;
+using NFC.Api.Config.Jwt;
 using NFC.Api.Config.Swagger;
 using NFC.Api.Config.Validators;
 using NFC.Application.DependencyManager;
@@ -46,8 +47,12 @@ namespace NFC.WebAPI
         {
             services.AddControllers();
 
+#if DEBUG
             services.SwaggerConfig();
-
+#endif
+#if !DEBUG
+             services.JwtConfig(this.Configuration["JwtToken:Issuer"], this.Configuration["JwtToken:SecretKey"]);
+#endif
             services.AddCors(); // Make sure you call this previous to AddMvc
 
             services.AddMvc(options =>
@@ -58,15 +63,6 @@ namespace NFC.WebAPI
 
             services.InitializeAutoMapper();
             services.InitializeInjection();
-
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "https://localhost:5443/";
-                    options.RequireHttpsMetadata = true;
-                    options.ApiName = "api1";
-                });
         }
 
         /// <summary>
@@ -89,7 +85,6 @@ namespace NFC.WebAPI
                 app.UseHsts();
             }
 
-            // Make sure you call this before calling app.UseMvc()
             app.CorsConfig();
 
             app.UseHttpsRedirection();
@@ -98,7 +93,8 @@ namespace NFC.WebAPI
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            app.UseAuthentication();
+
+            // Make sure you call this before calling app.UseMvc()
             app.UseMvc(routes =>
             {
                 routes.MapSpaFallbackRoute(
