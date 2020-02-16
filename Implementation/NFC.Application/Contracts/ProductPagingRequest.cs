@@ -7,11 +7,11 @@
     public class ProductPagingRequest : PagingRequest
     {
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the input.
         /// </summary>
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; set; }
+        public string Input { get; set; }
     }
 }

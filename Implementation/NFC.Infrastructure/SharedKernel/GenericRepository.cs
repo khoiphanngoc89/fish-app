@@ -67,7 +67,7 @@ namespace NFC.Infrastructure.SharedKernel
             this.paramsBuilder = builder;
 
             this.tblName = this.GetTableName(typeof(TEntity));
-            this.paramsBuilder.RegisterIgnoredProp(typeof(TEntity).GetProperties().Where(n => n.PropertyType.GetProperty(n.Name).GetAccessors()[0].IsVirtual)?.Select(n => n.Name));
+            this.paramsBuilder.RegisterIgnoredProp(this.GetIgnoreProps());
         }
 
         #endregion
@@ -337,6 +337,15 @@ namespace NFC.Infrastructure.SharedKernel
         #endregion
 
         #region Internal methods
+
+        /// <summary>
+        /// Get ignore properties.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<string> GetIgnoreProps()
+        {
+            return typeof(TEntity).GetProperties().Where(n => !n.GetAccessors()[0].IsFinal && n.GetAccessors()[0].IsVirtual).Select(m => m.Name);
+        }
 
         /// <summary>
         /// Gets table name.

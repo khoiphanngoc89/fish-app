@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NFC.Application.Shared;
 using NFC.Common.Constants;
+using NFC.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -80,7 +81,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         private IDictionary<string, object> Standardize(IDictionary<string, object> dicMapping)
         {
-            if (this.ignoredProps != null)
+            if (!this.ignoredProps.IsNullOrEmpty())
             {
                 foreach (var prop in this.ignoredProps)
                 {

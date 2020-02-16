@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NFC.Application.Contracts;
 using NFC.Common.Constants;
-using NFC.Persistence.Contracts;
 using NFC.Persistence.Services;
-using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace NFC.WebAPI.Controllers

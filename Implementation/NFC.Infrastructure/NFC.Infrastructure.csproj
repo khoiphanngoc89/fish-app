@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NFC.Application\NFC.Application.csproj" />
+    <ProjectReference Include="..\NFC.Common\NFC.Common.csproj" />
     <ProjectReference Include="..\NFC.Domain\NFC.Domain.csproj" />
   </ItemGroup>
 
