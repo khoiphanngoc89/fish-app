@@ -1,4 +1,5 @@
-﻿using NFC.Domain.Entities;
+﻿using NFC.Application.Shared;
+using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
 
 namespace NFC.Infrastructure.Repositories
@@ -20,7 +21,8 @@ namespace NFC.Infrastructure.Repositories
         /// Initializes a new instance of the <see cref="BillRepository"/> class.
         /// </summary>
         /// <param name="repository">The data access object.</param>
-        public BillRepository(IRepository repository) : base(repository)
+        /// <param name="builder">The builder.</param>
+        public BillRepository(IRepository repository, IParamsBuilder builder) : base(repository, builder)
         {
         }
     }

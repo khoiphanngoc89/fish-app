@@ -1,4 +1,5 @@
 ﻿using NFC.Application.DependencyManager;
+using NFC.Application.Shared;
 using NFC.Infrastructure.Repositories;
 using NFC.Infrastructure.SharedKernel;
 using System.ComponentModel.Composition;
@@ -29,6 +30,7 @@ namespace NFC.Infrastructure
             register.AddTransient<IProductRepository, ProductRepository>();
             register.AddSingleton<IDbFactory, DbFactory>();
             register.AddTransient<IRepository, Repository>();
+            register.AddTransient<IParamsBuilder, ParmasBuilder>();
 
         }
     }

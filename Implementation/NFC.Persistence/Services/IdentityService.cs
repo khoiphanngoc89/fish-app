@@ -19,7 +19,13 @@ namespace NFC.Persistence.Services
     /// </summary>
     public interface IIdentityService
     {
-        IdentityDto Authenticate(string email, string password);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        AuthenticationDto Authenticate(string email, string password);
     }
 
 
@@ -63,15 +69,15 @@ namespace NFC.Persistence.Services
         /// <param name="email">The email.</param>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        public IdentityDto Authenticate(string email, string password)
+        public AuthenticationDto Authenticate(string email, string password)
         {
             var dao = this.memberRepos.Authenticate(email, password);
             if (Equals(dao, null))
             {
-                return new Authentication();
+                return new AuthenticationDto();
             }
 
-            var model = this.mapper.Map<Member, Authentication>(dao);
+            var model = this.mapper.Map<Member, AuthenticationDto>(dao);
             model.Token = this.GenerateToken(dao);
             return model;
         }
@@ -80,13 +86,13 @@ namespace NFC.Persistence.Services
         /// Refreshes the token.
         /// </summary>
         /// <param name="token">The access token.</param>
-        /// <param name="refreshToken">The refresh token.</param>
         public string RefreshToken(string token)
         {
             var validatedToken = this.GetPrincipleFromToken(token);
             if (validatedToken == null)
             {
-                return new IdentityDto();
+                //return new IdentityDto();
+                return null;
             }
 
 
@@ -106,7 +112,7 @@ namespace NFC.Persistence.Services
                 var principal = new JwtSecurityTokenHandler().ValidateToken(token, this.tokenValidationParameters, out var validatedToken);
                 return !this.IsJwtWithValidSecurityAlgorithm(validatedToken) ? null : principal;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

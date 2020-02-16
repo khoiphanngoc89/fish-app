@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace NFC.Infrastructure.SharedKernel
-{
+namespace NFC.Application.Shared
+{ 
     /// <summary>
     /// Provides shared data access object methods.
     /// </summary>
@@ -87,12 +87,12 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// Gets the by by paging search.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="input">The input.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
-        IEnumerable<TEntity> GetByByPagingSearch(string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false);
+        IEnumerable<TEntity> GetAllByCondition(string input, int pageNumber = 1, int pageSize = 30, bool getLatest = false);
 
         /// <summary>
         /// Gets the by by paging search.
@@ -104,7 +104,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
-        IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class;
+        IEnumerable<T> GetAllByCondition<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class;
 
         /// <summary>
         /// Remove an instance.

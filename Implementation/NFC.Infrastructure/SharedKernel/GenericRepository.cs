@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using NFC.Application.Shared;
 using NFC.Common.Constants;
 using NFC.Common.Extensions;
+using NFC.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,8 +17,6 @@ namespace NFC.Infrastructure.SharedKernel
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    /// <seealso cref="System.IDisposable" />
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{TKey, TEntity}" />
     public abstract class GenericRepositoryBase<TKey, TEntity> : IDisposable, IGenericRepository<TKey, TEntity>
         where TKey : IComparable
         where TEntity : class, IDomainEntity<TKey>
@@ -27,7 +26,12 @@ namespace NFC.Infrastructure.SharedKernel
         /// <summary>
         /// The repository
         /// </summary>
-        protected readonly IRepository repository;
+        public readonly IRepository repository;
+
+        /// <summary>
+        /// The parmas builder.
+        /// </summary>
+        protected readonly IParamsBuilder paramsBuilder;
 
         /// <summary>
         /// The disposed
@@ -44,16 +48,6 @@ namespace NFC.Infrastructure.SharedKernel
         /// </summary>
         private readonly string tblName;
 
-        /// <summary>
-        /// The table attribute.
-        /// </summary>
-        private const string TableAttribute = "TableAttribute";
-
-        /// <summary>
-        /// The skip properties
-        /// </summary>
-        private readonly IEnumerable<string> ignoreProps;
-
         #endregion
 
         #region Properties
@@ -66,11 +60,14 @@ namespace NFC.Infrastructure.SharedKernel
         /// Initializes a new instance of the <see cref="GenericRepositoryBase{TKey, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The data access object.</param>
-        public GenericRepositoryBase(IRepository repository)
+        /// <param name="builder">The builder.</param>
+        public GenericRepositoryBase(IRepository repository, IParamsBuilder builder)
         {
-            this.tblName = this.GetTableName(typeof(TEntity));
-            this.ignoreProps = typeof(TEntity).GetProperties().Where(n => n.PropertyType.GetProperty(n.Name).GetAccessors()[0].IsVirtual)?.Select(n => n.Name);
             this.repository = repository;
+            this.paramsBuilder = builder;
+
+            this.tblName = this.GetTableName(typeof(TEntity));
+            this.paramsBuilder.RegisterIgnoredProp(typeof(TEntity).GetProperties().Where(n => n.PropertyType.GetProperty(n.Name).GetAccessors()[0].IsVirtual)?.Select(n => n.Name));
         }
 
         #endregion
@@ -84,7 +81,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         public virtual TKey Add(TEntity model)
         {
-            return this.repository.SelectSingleOrDefault<TKey>($"Create{this.tblName}", this.BuildParmas4Adding(model));
+            return this.repository.SelectSingleOrDefault<TKey>($"Create{this.tblName}", this.paramsBuilder.Build(model));
         }
 
         /// <summary>
@@ -94,7 +91,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         public virtual TEntity GetSingleById(TKey id)
         {
-            return this.repository.SelectSingleOrDefault<TEntity>($"Get{this.tblName}ById", this.BuildParmas(id));
+            return this.repository.SelectSingleOrDefault<TEntity>($"Get{this.tblName}ById", this.paramsBuilder.Build(id));
         }
 
         /// <summary>
@@ -115,7 +112,12 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         public IEnumerable<TEntity> GetAllByPaging(int pageNumber = 1, int pageSize = 30, bool getLatest = false)
         {
-            return this.repository.Select<TEntity>($"GetAll{this.tblName}ByPaging", this.BuildPagingParams(pageNumber, pageSize, getLatest));
+            return this.repository.Select<TEntity>($"GetAll{this.tblName}ByPaging", this.paramsBuilder.Build(new PagingContext
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                GetLatest = getLatest
+            }));
         }
 
         /// <summary>
@@ -128,7 +130,12 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         public IEnumerable<TEntity> GetAllByPaging(string storeName, int pageNumber = 1, int pageSize = 30, bool getLatest = false)
         {
-            return this.repository.Select<TEntity>(storeName, this.BuildPagingParams(pageNumber, pageSize, getLatest));
+            return this.repository.Select<TEntity>(storeName, this.paramsBuilder.Build(new PagingContext
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                GetLatest = getLatest
+            }));
         }
 
         /// <summary>
@@ -142,38 +149,48 @@ namespace NFC.Infrastructure.SharedKernel
         /// <returns></returns>
         public IEnumerable<T> GetAllByPaging<T>(string storeName, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class
         {
-            return this.repository.Select<T>(storeName, this.BuildPagingParams(pageNumber, pageSize, getLatest));
+            return this.repository.Select<T>(storeName, this.paramsBuilder.Build(new PagingContext
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                GetLatest = getLatest
+            }));
         }
 
         /// <summary>
         /// Gets the by by paging search.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="input">The input.</param>
         /// <param name="pageNumber">The page number.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
         /// <returns></returns>
-        public IEnumerable<TEntity> GetByByPagingSearch(string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false)
+        public IEnumerable<TEntity> GetAllByCondition(string input, int pageNumber = 1, int pageSize = 30, bool getLatest = false)
         {
-            return this.Select<TEntity>($"GetAll{this.tblName}ByPagingSearch", this.BuildPagingSearchParams(name, pageNumber, pageSize, getLatest));
+            return this.Select<TEntity>($"GetAll{this.tblName}ByCondition", this.paramsBuilder.Build(new SearchingContext
+            {
+                Input = input,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                GetLatest = getLatest
+            }));
         }
 
-
-
         /// <summary>
-        /// Gets the by by paging search.
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="storeName">Name of the store.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
+        /// <param name="storeName"></param>
+        /// <param name="name"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="getLatest"></param>
         /// <returns></returns>
-        public IEnumerable<T> GetByByPagingSearch<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class
+        public IEnumerable<T> GetAllByCondition<T>(string storeName, string name, int pageNumber = 1, int pageSize = 30, bool getLatest = false) where T : class
         {
             throw new NotImplementedException();
         }
+
 
         /// <summary>
         /// Find by condition.
@@ -203,7 +220,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="model">The model.</param>
         public virtual void Update(TKey id, TEntity model)
         {
-            this.repository.Execute<int>($"[Update{this.tblName}]", this.BuildParmas(model));
+            this.repository.Execute<int>($"[Update{this.tblName}]", this.paramsBuilder.Build(model));
         }
 
         /// <summary>
@@ -212,7 +229,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="key">The key.</param>
         public virtual void Remove(TKey key)
         {
-            this.repository.Execute<int>($"Delete{this.tblName}ById", this.BuildParmas(key));
+            this.repository.Execute<int>($"Delete{this.tblName}ById", this.paramsBuilder.Build(key));
         }
 
         /// <summary>
@@ -322,70 +339,6 @@ namespace NFC.Infrastructure.SharedKernel
         #region Internal methods
 
         /// <summary>
-        /// Builds the parmas for adding.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildParmas4Adding(TEntity model)
-        {
-            var parmas = this.BuildParmas(model);
-            parmas.Remove(Const.Id);
-            return parmas;
-        }
-
-        /// <summary>
-        /// Builds the parmas.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildParmas(TEntity model)
-        {
-            var json = JsonConvert.SerializeObject(model);
-            var dicMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-            return this.RemoveNotMappingProps(dicMapping);
-        }
-
-        protected virtual IDictionary<string, object> BuildParmas<T>(params T[] input)
-        {
-            var json = JsonConvert.SerializeObject(input);
-            return JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-        }
-
-        /// <summary>
-        /// Builds the parmas.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildParmas(TKey id)
-        {
-            var dic = new Dictionary<string, object>
-            {
-                { Const.Id, id }
-            };
-            return dic;
-        }
-
-        /// <summary>
-        /// Removes the not mapping props.
-        /// </summary>
-        /// <param name="dicMapping">The dic mapping.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> RemoveNotMappingProps(IDictionary<string, object> dicMapping)
-        {
-            if (this.ignoreProps != null)
-            {
-                foreach (var prop in this.ignoreProps)
-                {
-                    dicMapping.Remove(prop);
-                }
-            }
-
-            return dicMapping;
-        }
-
-       
-
-        /// <summary>
         /// Gets table name.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -394,42 +347,6 @@ namespace NFC.Infrastructure.SharedKernel
         {
             var name = type.Name;
             return name;
-        }
-
-        /// <summary>
-        /// Builds the paging parameters.
-        /// </summary>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
-        /// <returns></returns>
-        protected IDictionary<string, object> BuildPagingParams(int pageNumber, int pageSize, bool getLatest)
-        {
-            return new Dictionary<string, object>
-            {
-                [Const.PageNumber] = pageNumber,
-                [Const.PageSize] = pageSize,
-                [Const.GetLatest] = getLatest
-            };
-        }
-
-        /// <summary>
-        /// Builds the paging search parameters.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="getLatest">if set to <c>true</c> [get latest].</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildPagingSearchParams(string name, int pageNumber, int pageSize, bool getLatest)
-        {
-            return new Dictionary<string, object>
-            {
-                [Const.Name] = name,
-                [Const.PageNumber] = pageNumber,
-                [Const.PageSize] = pageSize,
-                [Const.GetLatest] = getLatest
-            };
         }
 
         /// <summary>
@@ -465,6 +382,7 @@ namespace NFC.Infrastructure.SharedKernel
             };
         }
 
+      
         #endregion
     }
 
@@ -473,7 +391,6 @@ namespace NFC.Infrastructure.SharedKernel
     /// </summary>
     /// <remarks>The wraper dapper framework methods.</remarks>
     /// <seealso cref="System.IDisposable" />
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IRepository" />
     public class Repository : IRepository, IDisposable
     {
         #region Variables

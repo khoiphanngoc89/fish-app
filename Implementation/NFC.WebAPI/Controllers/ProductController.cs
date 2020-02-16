@@ -26,7 +26,6 @@ namespace NFC.WebAPI.Controllers
         /// Initializes a new instance of the <see cref="ProductController"/> class.
         /// </summary>
         /// <param name="mapper">The mapper.</param>
-        /// <param name="firebaseService">The firebase service.</param>
         /// <param name="productService">The product service.</param>
         public ProductController(IMapper mapper, IProductService productService) : base(mapper)
         {
