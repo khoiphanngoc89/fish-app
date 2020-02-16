@@ -19,6 +19,7 @@ namespace NFC.Persistence
         {
             register.AddTransient<IProductService, ProductService>();
             register.AddTransient<IMenuService, MenuService>();
+            register.AddTransient<IAuthenticateService, AuthenticateService>();
         }
     }
 }

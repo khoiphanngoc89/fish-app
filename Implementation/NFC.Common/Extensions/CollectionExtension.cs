@@ -18,7 +18,7 @@ namespace NFC.Common.Extensions
         /// </returns>
         public static bool IsNullOrEmpty<T>(this ICollection<T> collection)
         {
-            return collection == null || collection.Any();
+            return collection == null || !collection.Any();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace NFC.Common.Extensions
         /// </returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
-            return enumerable == null || enumerable.Any();
+            return enumerable == null || !enumerable.Any();
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace NFC.Application.Shared
-{ 
+{
     /// <summary>
     /// Provides shared data access object methods.
     /// </summary>

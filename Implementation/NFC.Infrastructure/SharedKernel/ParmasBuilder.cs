@@ -4,7 +4,6 @@ using NFC.Common.Constants;
 using NFC.Common.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Infrastructure.SharedKernel
 {
@@ -46,7 +45,7 @@ namespace NFC.Infrastructure.SharedKernel
         /// <param name="props">The properties.</param>
         public void RegisterIgnoredProp(IEnumerable<string> props)
         {
-           this.ignoredProps = props;
+            this.ignoredProps = props;
         }
 
         #region Private methods

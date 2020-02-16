@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using NFC.Application.Contracts;
 using NFC.Common.Constants;
 using NFC.Persistence.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NFC.WebAPI.Controllers

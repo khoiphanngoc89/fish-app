@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +9,6 @@ using NFC.Api.Config.Jwt;
 using NFC.Api.Config.Swagger;
 using NFC.Api.Config.Validators;
 using NFC.Application.DependencyManager;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace NFC.WebAPI
 {
@@ -107,7 +105,7 @@ namespace NFC.WebAPI
             {
                 endpoints.MapControllers();
             });
-            
+
         }
     }
 }

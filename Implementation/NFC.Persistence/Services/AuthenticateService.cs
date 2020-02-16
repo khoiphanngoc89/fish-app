@@ -7,10 +7,8 @@ using NFC.Domain.Entities;
 using NFC.Infrastructure.Repositories;
 using NFC.Persistence.Contracts;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace NFC.Persistence.Services
 {
@@ -72,7 +70,7 @@ namespace NFC.Persistence.Services
         public AuthenticationDto Authenticate(string email, string password)
         {
             var dao = this.memberRepos.Authenticate(email, password);
-            if (Equals(dao, null))
+            if (Equals(dao, null) || int.Equals(dao.Id, 0))
             {
                 return new AuthenticationDto();
             }
@@ -138,7 +136,7 @@ namespace NFC.Persistence.Services
         private string GenerateToken(Member member)
         {
             IdentityModelEventSource.ShowPII = true;
-            var signinKey = new SymmetricSecurityKey(EncodeHelper.EncodeASCII(this.configuration["JwtToken:SecretKey"]));
+            var signinKey = new SymmetricSecurityKey(EncodeHelper.EncodeASCII(this.configuration["JwtSettings:SecretKey"]));
             var tokenDesciptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]

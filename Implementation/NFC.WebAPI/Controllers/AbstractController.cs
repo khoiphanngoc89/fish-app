@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NFC.Application.Contracts;
 using NFC.Common.Constants;
-using NFC.Persistence.Contracts;
-using NFC.Persistence.Services;
 using System;
 using System.Data.SqlClient;
 using System.IO;

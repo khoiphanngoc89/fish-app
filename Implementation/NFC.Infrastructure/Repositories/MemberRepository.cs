@@ -1,4 +1,5 @@
-﻿using NFC.Application.Shared;
+﻿using NFC.Application.Context;
+using NFC.Application.Shared;
 using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
 
@@ -10,12 +11,12 @@ namespace NFC.Infrastructure.Repositories
     public interface IMemberRepository : IGenericRepository<long, Member>
     {
         /// <summary>
-        /// 
+        /// Authenticates the user information.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="email">The email.</param>
+        /// <param name="password">The password.</param>
         /// <returns></returns>
-        Member Authenticate(string username, string password);
+        Member Authenticate(string email, string password);
     }
 
     /// <summary>
@@ -36,12 +37,16 @@ namespace NFC.Infrastructure.Repositories
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Member Authenticate(string username, string password)
+        public Member Authenticate(string email, string password)
         {
-            return this.SelectSingleOrDefault("Authenticate", this.paramsBuilder.Build(username, password));
+            return this.SelectSingleOrDefault("Authenticate", this.paramsBuilder.Build(new AuthenticateContext
+            {
+                Email = email,
+                Password = password
+            }));
         }
     }
 }

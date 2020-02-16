@@ -1,9 +1,7 @@
 ﻿using Dapper;
-using Newtonsoft.Json;
+using NFC.Application.Context;
 using NFC.Application.Shared;
-using NFC.Common.Constants;
 using NFC.Common.Extensions;
-using NFC.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -391,7 +389,7 @@ namespace NFC.Infrastructure.SharedKernel
             };
         }
 
-      
+
         #endregion
     }
 

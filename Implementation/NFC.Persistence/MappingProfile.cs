@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using NFC.Domain.Entities;
 using NFC.Persistence.Contracts;
-using NFC.Persistence.Helpers;
 using System.Linq;
 
 namespace NFC.Persistence

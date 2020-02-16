@@ -71,6 +71,6 @@ namespace NFC.Domain.Entities
         /// <value>
         /// The modified date.
         /// </value>
-        public DateTime? ModificationDate { get; set ; }
+        public DateTime? ModificationDate { get; set; }
     }
 }
