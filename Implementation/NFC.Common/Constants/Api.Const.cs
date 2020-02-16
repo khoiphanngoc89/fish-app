@@ -39,5 +39,10 @@
         /// The delete
         /// </summary>
         public const string Delete = "Delete/{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Authenticate = "Authenticate";
     }
 }

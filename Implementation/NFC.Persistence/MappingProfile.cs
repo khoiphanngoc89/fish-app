@@ -29,6 +29,10 @@ namespace NFC.Persistence
                     ParentId = n.ParentId,
                     Url = n.Url
                 })));
+            CreateMap<Member, AuthenticationDto>()
+                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.UserName, opts => opts.MapFrom(src => src.UserName));
 
         }
     }

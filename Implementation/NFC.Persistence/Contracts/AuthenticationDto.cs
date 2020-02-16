@@ -9,6 +9,10 @@ namespace NFC.Persistence.Contracts
     /// </summary>
     public class AuthenticationDto
     {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         /// <summary>
         /// Gets or sets the user name.
         /// </summary>

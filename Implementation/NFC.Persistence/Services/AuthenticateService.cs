@@ -17,7 +17,7 @@ namespace NFC.Persistence.Services
     /// <summary>
     /// 
     /// </summary>
-    public interface IIdentityService
+    public interface IAuthenticateService
     {
         /// <summary>
         /// 
@@ -32,7 +32,7 @@ namespace NFC.Persistence.Services
     /// <summary>
     /// 
     /// </summary>
-    public class IdentityService : ServiceBase, IIdentityService
+    public class AuthenticateService : ServiceBase, IAuthenticateService
     {
         /// <summary>
         /// The configuration
@@ -56,7 +56,7 @@ namespace NFC.Persistence.Services
         /// <param name="tokenValidationParameters"></param>
         /// <param name="memberRepository"></param>
         /// <param name="mapper"></param>
-        public IdentityService(IConfiguration configuration, TokenValidationParameters tokenValidationParameters, IMemberRepository memberRepository, IMapper mapper) : base(mapper)
+        public AuthenticateService(IConfiguration configuration, TokenValidationParameters tokenValidationParameters, IMemberRepository memberRepository, IMapper mapper) : base(mapper)
         {
             this.configuration = configuration;
             this.memberRepos = memberRepository;
