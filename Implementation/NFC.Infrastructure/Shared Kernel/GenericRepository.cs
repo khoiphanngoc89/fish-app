@@ -18,7 +18,7 @@ namespace NFC.Infrastructure.SharedKernel
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="System.IDisposable" />
     /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{TKey, TEntity}" />
-    public class GenericRepositoryBase<TKey, TEntity> : IDisposable, IGenericRepository<TKey, TEntity>
+    public abstract class GenericRepositoryBase<TKey, TEntity> : IDisposable, IGenericRepository<TKey, TEntity>
         where TKey : IComparable
         where TEntity : class, IDomainEntity<TKey>
     {
@@ -322,6 +322,18 @@ namespace NFC.Infrastructure.SharedKernel
         #region Internal methods
 
         /// <summary>
+        /// Builds the parmas for adding.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        protected virtual IDictionary<string, object> BuildParmas4Adding(TEntity model)
+        {
+            var parmas = this.BuildParmas(model);
+            parmas.Remove(Const.Id);
+            return parmas;
+        }
+
+        /// <summary>
         /// Builds the parmas.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -331,6 +343,12 @@ namespace NFC.Infrastructure.SharedKernel
             var json = JsonConvert.SerializeObject(model);
             var dicMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
             return this.RemoveNotMappingProps(dicMapping);
+        }
+
+        protected virtual IDictionary<string, object> BuildParmas<T>(params T[] input)
+        {
+            var json = JsonConvert.SerializeObject(input);
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
         }
 
         /// <summary>
@@ -365,17 +383,7 @@ namespace NFC.Infrastructure.SharedKernel
             return dicMapping;
         }
 
-        /// <summary>
-        /// Builds the parmas for adding.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        protected virtual IDictionary<string, object> BuildParmas4Adding(TEntity model)
-        {
-            var parmas = this.BuildParmas(model);
-            parmas.Remove(Const.Id);
-            return parmas;
-        }
+       
 
         /// <summary>
         /// Gets table name.

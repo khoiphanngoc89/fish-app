@@ -48,10 +48,11 @@ namespace NFC.WebAPI
             services.AddControllers();
 
 #if DEBUG
+            services.JwtConfig(this.Configuration["JwtSettings:Issuer"], this.Configuration["JwtSettings:SecretKey"]);
             services.SwaggerConfig();
 #endif
 #if !DEBUG
-             services.JwtConfig(this.Configuration["JwtToken:Issuer"], this.Configuration["JwtToken:SecretKey"]);
+             services.JwtConfig(this.Configuration["JwtToken:ProdIssuer"]);
 #endif
             services.AddCors(); // Make sure you call this previous to AddMvc
 

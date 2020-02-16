@@ -8,6 +8,7 @@ namespace NFC.Infrastructure.Repositories
     /// </summary>
     public interface IMemberRepository : IGenericRepository<long, Member>
     {
+        Member Authenticate(string username, string password);
     }
 
     /// <summary>
@@ -22,6 +23,17 @@ namespace NFC.Infrastructure.Repositories
         /// <param name="repository">The data access object.</param>
         public MemberRepository(IRepository repository) : base(repository)
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Member Authenticate(string username, string password)
+        {
+            return this.SelectSingleOrDefault("Authenticate", this.BuildParmas())
         }
     }
 }
