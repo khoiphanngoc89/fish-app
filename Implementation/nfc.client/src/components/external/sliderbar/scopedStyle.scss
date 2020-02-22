@@ -1,0 +1,29 @@
+@mixin element-position() {
+    position: absolute;
+    bottom: 3rem;
+}
+.is-active {
+    .al {
+        img {
+        filter: grayscale(0%);
+        }
+    }
+}
+.al {
+    img {
+        filter: grayscale(100%);
+    }
+}
+.shopping-btn {
+    @include element-position();
+    left: 3rem;
+}
+.des-container {
+    @include element-position();
+    right: 3rem;
+    color: #fff;
+    background-color: #111;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 4px;
+}

@@ -18,8 +18,8 @@
 import { FadeTransition } from "vue2-transitions";
 export default {
   components: {
-    "top-nav": () => import("@/components/external/TopNav"),
-    "footer-bar": () => import("@/components/external/FooterBar"),
+    "top-nav": () => import("@/components/external/topnav/Index.vue"),
+    "footer-bar": () => import("@/components/external/footerbar/Index.vue"),
     FadeTransition
   }
 };

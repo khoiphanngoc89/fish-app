@@ -1,0 +1,16 @@
+.center-position {
+    vertical-align: super;
+  }
+  .none-btn {
+    border: none;
+    background-color: transparent;
+  }
+  .home-nav {
+    display: none;
+  }
+  
+  @media screen and (max-width: 1021px){
+    .home-nav {
+      display: inline;
+    }
+  }

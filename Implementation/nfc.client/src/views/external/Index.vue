@@ -8,8 +8,8 @@
 <script>
 export default {
   components: {
-    'slider': () => import("@/components/external/SliderBar"),
-    'product-item': () => import("@/components/external/ProductItem"),
+    'slider': () => import("@/components/external/sliderbar/Index.vue"),
+    'product-item': () => import("@/components/external/product/Index.vue"),
   }
 }
 </script>
