@@ -1,7 +1,6 @@
-<template scr="template.html">
-</template>
+<template src="./template.html"></template>
 
-<script scr="script"></script>
+<script src="./script"></script>
 
-<style lang="scss" scr="style.scss" scoped>
+<style lang="scss" src="./style.scss" scoped>
 </style>

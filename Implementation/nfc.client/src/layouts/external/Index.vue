@@ -1,8 +1,8 @@
 <template>
   <section>
-     <loading/>
+    <loading/>
     <section class="always-top">
-      <top-nav />
+      <top-nav/>
     </section>
     <section class="container">
       <fade-transition :duration="200" origin="center top" mode="out-in">

@@ -4,7 +4,7 @@ export const STATUS_ERROR = 'ERROR';
 export const AUTHEN_REQUEST = 'auth_request'
 export const AUTHEN_SUCCESS = 'auth_success';
 export const AUTHEN_ERROR = 'auth_error';
-export const LOGOUT = 'logout'
+export const AUTHEN_LOGOUT = 'auth_logout'
 
 export default {
     STATUS_LOADING,
@@ -13,5 +13,5 @@ export default {
     AUTHEN_REQUEST,
     AUTHEN_SUCCESS,
     AUTHEN_ERROR,
-    LOGOUT
+    AUTHEN_LOGOUT
 }

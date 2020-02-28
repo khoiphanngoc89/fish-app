@@ -1,4 +1,7 @@
 export const LOGIN = 'login';
+export const LOGOUT = 'logout';
+export const REGISTER = 'register';
+export const REFRESH_AUTHEN = 'refresh_auth'
 export const DOT = '.';
 export const REQUIRE = '*';
 export const NEXT_PAGE = 'Next page'

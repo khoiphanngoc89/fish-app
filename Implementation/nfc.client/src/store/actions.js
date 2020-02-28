@@ -6,8 +6,14 @@ import {
     AUTHEN_REQUEST,
     AUTHEN_SUCCESS,
     AUTHEN_ERROR,
-    LOGOUT
+    AUTHEN_LOGOUT
 } from './mutation-types';
+import {
+    LOGIN,
+    LOGOUT,
+    REGISTER,
+    REFRESH_AUTHEN
+} from '@/utils/constants/shared.constant'
 import {
     SIGNIN_URL,
     REGISTER_URL
@@ -15,7 +21,7 @@ import {
 const AUTHORIZATION = 'Authorization';
 
 export default {
-    login({ commit }, context) {
+    [LOGIN]({ commit }, context) {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
             axios.post(SIGNIN_URL, context)
@@ -33,12 +39,12 @@ export default {
                 })
         })
     },
-    logout({ commit }) {
-        commit(LOGOUT);
+    [LOGOUT]({ commit }) {
+        commit(AUTHEN_LOGOUT);
         storageUtil.removeToken();
         delete axios.defaults.headers.common[AUTHORIZATION];
     },
-    register({ commit }, user) {
+    [REGISTER]({ commit }, user) {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
             axios.post(REGISTER_URL, user)
@@ -56,7 +62,7 @@ export default {
                 })
         })
     },
-    refreshToken() {
+    [REFRESH_AUTHEN]() {
         return new Promise((resolve, reject) => {
             let parmas = {
                 ...storageUtil.getUser(),
