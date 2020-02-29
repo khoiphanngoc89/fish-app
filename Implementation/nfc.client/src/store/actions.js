@@ -24,7 +24,13 @@ export default {
     [LOGIN]({ commit }, context) {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
-            axios.post(SIGNIN_URL, context)
+            const headers = {
+                'Content-Type': 'application/json',
+                'email': context.email,
+                'pass': context.password
+            }
+
+            axios.post(SIGNIN_URL, {}, { headers: headers })
                 .then(({ data }) => {
                     let info = util.getAuthenAPIInfo(data);
                     storageUtil.setAuthStorage(info);
