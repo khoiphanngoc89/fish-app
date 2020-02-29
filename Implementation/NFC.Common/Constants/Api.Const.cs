@@ -1,5 +1,8 @@
 ﻿namespace NFC.Common.Constants
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ApiConst
     {
         /// <summary>
@@ -36,5 +39,10 @@
         /// The delete
         /// </summary>
         public const string Delete = "Delete/{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Authenticate = "Authenticate";
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NFC.Application.Shared
 {
@@ -9,8 +7,20 @@ namespace NFC.Application.Shared
     /// </summary>
     public interface IAudiEntity
     {
+        /// <summary>
+        /// Gets or sets the creation date.
+        /// </summary>
+        /// <value>
+        /// The creation date.
+        /// </value>
         DateTime? CreationDate { get; set; }
 
-        DateTime? ModifiedDate { get; set; }
+        /// <summary>
+        /// Gets or sets the modified date.
+        /// </summary>
+        /// <value>
+        /// The modified date.
+        /// </value>
+        DateTime? ModificationDate { get; set; }
     }
 }

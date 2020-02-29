@@ -1,7 +1,17 @@
 ﻿namespace NFC.Application.Contracts
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.Contracts.PagingRequest" />
     public class ProductPagingRequest : PagingRequest
     {
-        public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the input.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Input { get; set; }
     }
 }

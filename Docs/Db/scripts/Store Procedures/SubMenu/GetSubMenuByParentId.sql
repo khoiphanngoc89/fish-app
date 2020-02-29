@@ -9,6 +9,9 @@
 -- This block of comments will not be included in
 -- the definition of the procedure.
 -- ================================================
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('[GetSubMenuByParentId]'))
+   EXEC('CREATE PROCEDURE [GetSubMenuByParentId] AS BEGIN SET NOCOUNT ON; END')
+   
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +21,7 @@ GO
 -- Create date: 17-12-2019
 -- Description:	Get sub menu by parent id
 -- =============================================
-CREATE PROCEDURE GetSubMenuByParentId
+ALTER PROCEDURE GetSubMenuByParentId
 	@ParentId INT
 	-- Add the parameters for the stored procedure here
 AS
@@ -30,4 +33,3 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT * FROM SubMenu WHERE ParentId = @ParentId
 END
-GO

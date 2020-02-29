@@ -2,6 +2,11 @@
 
 namespace NFC.Persistence.Contracts
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
+    /// <seealso cref="NFC.Application.Shared.ISeoMetadata" />
     public class ProductDto : DomainEntity<long>, IActiveMetadata, ISeoMetadata
     {
         /// <summary>

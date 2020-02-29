@@ -31,6 +31,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT TOP 1 * FROM [Product] WHERE Id = @Id
+	SELECT TOP 1 1 FROM [Product] WHERE Id = @Id
 END
 GO

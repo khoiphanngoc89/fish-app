@@ -1,3 +1,13 @@
 export const LOGIN = 'login';
+export const LOGOUT = 'logout';
+export const REGISTER = 'register';
+export const REFRESH_AUTHEN = 'refresh_auth'
 export const DOT = '.';
 export const REQUIRE = '*';
+export const NEXT_PAGE = 'Next page'
+export const PREVIOUS_PAGE = 'Previous page'
+export const PAGE = 'Page'
+export const CURRENT_PAGE = 'Current page'
+export const PRE_PAGE_ICO = 'chevron-left'
+export const NEXT_PAGE_ICO = 'chevron-right'
+export const SPLASH = '/'

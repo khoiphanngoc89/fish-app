@@ -18,12 +18,7 @@ export default {
             number: 1,
             size: 30,
             getLatest: false,
-            order: '',
-            isSimple: false,
-            isRounded: true,
-            prevIcon: 'chevron-left',
-            nextIcon: 'chevron-right'
-
+            order: ''
         }
     },
     initStorage: function() {
@@ -31,5 +26,4 @@ export default {
             products: []
         }
     }
-
 }

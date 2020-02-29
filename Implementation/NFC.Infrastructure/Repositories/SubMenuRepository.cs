@@ -1,4 +1,5 @@
-﻿using NFC.Domain.Entities;
+﻿using NFC.Application.Shared;
+using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
 using System.Collections.Generic;
 
@@ -7,7 +8,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int32, NFC.Domain.Entities.SubMenu}" />
     public interface ISubMenuRepository : IGenericRepository<int, SubMenu>
     {
         /// <summary>
@@ -21,7 +21,6 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int32, NFC.Domain.Entities.SubMenu}" />
     /// <seealso cref="NFC.Infrastructure.Repositories.ISubMenuRepository" />
     public class SubMenuRepository : GenericRepositoryBase<int, SubMenu>, ISubMenuRepository
     {
@@ -29,7 +28,8 @@ namespace NFC.Infrastructure.Repositories
         /// Initializes a new instance of the <see cref="SubMenuRepository"/> class.
         /// </summary>
         /// <param name="repository">The data access object.</param>
-        public SubMenuRepository(IRepository repository) : base(repository)
+        /// <param name="builder">The builder</param>
+        public SubMenuRepository(IRepository repository, IParamsBuilder builder) : base(repository, builder)
         {
         }
 

@@ -58,8 +58,7 @@ import i18n from '@/plugins/i18n';
 import ArgonDashboard from './plugins/argon-dashboard';
 Vue.use(ArgonDashboard);
 
-import '@/plugins/vue-toasted';
-
+import './plugins/vue-toasted';
 
 new Vue({
   i18n,

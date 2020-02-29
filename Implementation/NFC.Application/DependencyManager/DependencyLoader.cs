@@ -10,6 +10,9 @@ using System.Text;
 
 namespace NFC.Application.DependencyManager
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DependencyLoader
     {
 

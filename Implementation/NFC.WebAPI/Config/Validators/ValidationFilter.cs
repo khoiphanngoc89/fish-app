@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using NFC.Application.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using NFC.Application.Contracts;
 
 namespace NFC.Api.Config.Validators
 {

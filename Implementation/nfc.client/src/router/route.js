@@ -5,13 +5,13 @@ const routes = [
   },
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "demo" */ '@/layouts/external/index'),
+    component: () => import(/* webpackChunkName: "demo" */ '@/layouts/external/Index'),
     redirect: '/home',
     children: [
       {
         path: '/',
         name: 'home',
-        component: () => import(/* webpackChunkName: "demo" */ '@/views/external/index'),
+        component: () => import(/* webpackChunkName: "demo" */ '@/views/external/Index'),
       },
     ]
   },

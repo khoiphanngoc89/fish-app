@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using System.Linq;
-using System;
 using NFC.Common.Utility;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace NFC.Api.Config.Automapper
 {
@@ -25,7 +25,7 @@ namespace NFC.Api.Config.Automapper
             var mappingConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AllowNullDestinationValues = true;
-                
+
                 foreach (var file in files)
                 {
                     // https://stackoverflow.com/questions/18483354/get-assembly-of-program-from-a-dll

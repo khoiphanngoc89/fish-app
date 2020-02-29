@@ -1,24 +1,28 @@
-﻿using NFC.Domain.Entities;
+﻿using NFC.Application.Shared;
+using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
 
 namespace NFC.Infrastructure.Repositories
 {
     /// <summary>
-    /// Defines the bill detail repository.
+    /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.BillDetail}" />
     public interface IBillDetailRepository : IGenericRepository<long, BillDetail>
     {
     }
 
     /// <summary>
-    /// Provides bill detail repository methods.
+    /// 
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.BillDetail}" />
-    /// <seealso cref="IBillDetailRepository" />
+    /// <seealso cref="NFC.Infrastructure.Repositories.IBillDetailRepository" />
     public class BillDetailRepository : GenericRepositoryBase<long, BillDetail>, IBillDetailRepository
     {
-        public BillDetailRepository(IRepository repository) : base(repository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BillDetailRepository"/> class.
+        /// </summary>
+        /// <param name="repository">The data access object.</param>
+        /// <param name="builder">The builder.</param>
+        public BillDetailRepository(IRepository repository, IParamsBuilder builder) : base(repository, builder)
         {
         }
     }

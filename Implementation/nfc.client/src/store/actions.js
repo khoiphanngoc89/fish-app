@@ -2,24 +2,36 @@
 import util from '@/utils/shared.util';
 import storageUtil from '@/utils/localStorage.util';
 import axios from '@/plugins/axios';
-import { 
+import {
     AUTHEN_REQUEST,
     AUTHEN_SUCCESS,
     AUTHEN_ERROR,
-    LOGOUT
+    AUTHEN_LOGOUT
 } from './mutation-types';
+import {
+    LOGIN,
+    LOGOUT,
+    REGISTER,
+    REFRESH_AUTHEN
+} from '@/utils/constants/shared.constant'
 import {
     SIGNIN_URL,
     REGISTER_URL
-} from '@/utils/constants/url.constant'
+} from '@/utils/constants/url.constant';
 const AUTHORIZATION = 'Authorization';
 
 export default {
-    login({ commit }, context) {
+    [LOGIN]({ commit }, context) {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
-            axios.post(SIGNIN_URL, context)
-                .then(({data}) => {
+            const headers = {
+                'Content-Type': 'application/json',
+                'email': context.email,
+                'pass': context.password
+            }
+
+            axios.post(SIGNIN_URL, {}, { headers: headers })
+                .then(({ data }) => {
                     let info = util.getAuthenAPIInfo(data);
                     storageUtil.setAuthStorage(info);
                     axios.defaults.headers.common[AUTHORIZATION] = `Bearer ${info.token}`;
@@ -33,12 +45,12 @@ export default {
                 })
         })
     },
-    logout({ commit }) {
-        commit(LOGOUT);
+    [LOGOUT]({ commit }) {
+        commit(AUTHEN_LOGOUT);
         storageUtil.removeToken();
         delete axios.defaults.headers.common[AUTHORIZATION];
     },
-    register({ commit }, user) {
+    [REGISTER]({ commit }, user) {
         return new Promise((resolve, reject) => {
             commit(AUTHEN_REQUEST);
             axios.post(REGISTER_URL, user)
@@ -56,21 +68,21 @@ export default {
                 })
         })
     },
-    refreshToken() {
+    [REFRESH_AUTHEN]() {
         return new Promise((resolve, reject) => {
             let parmas = {
                 ...storageUtil.getUser(),
                 token: localStorage.getToken()
             }
             axios.post('auth/refresh', parmas)
-                 .then(({data}) => {
-                     let token = util.getAPIData(data);
-                     storageUtil.setToken(token);
-                     resolve(data);
-                 })
-                 .catch(error => {
-                     reject(error)
-                 })
+                .then(({ data }) => {
+                    let token = util.getAPIData(data);
+                    storageUtil.setToken(token);
+                    resolve(data);
+                })
+                .catch(error => {
+                    reject(error)
+                })
         })
     }
 }

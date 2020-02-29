@@ -5,7 +5,7 @@ import {
     AUTHEN_REQUEST,
     AUTHEN_SUCCESS,
     AUTHEN_ERROR,
-    LOGOUT
+    AUTHEN_LOGOUT
 } from './mutation-types'
 
 export default {
@@ -24,7 +24,7 @@ export default {
         state.authorization.token = '';
         state.authorization.user = {};
     },
-    [LOGOUT](state) {
+    [AUTHEN_LOGOUT](state) {
         state.authorization.status = '';
         state.authorization.token = '';
         state.authorization.user = {};

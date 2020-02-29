@@ -1,5 +1,3 @@
-USE FISH
-GO
 -- ================================================
 -- Template generated from Template Explorer using:
 -- Create Procedure (New Menu).SQL
@@ -36,7 +34,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * FROM Product
+	SELECT TOP 6 * FROM Product
 	ORDER BY ModificationDate DESC
 END
 

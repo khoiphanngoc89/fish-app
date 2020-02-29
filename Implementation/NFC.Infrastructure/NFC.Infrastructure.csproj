@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\Debug</OutputPath>
+    <DocumentationFile>..\bin\Debug\NFC.Infrastructure.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Dapper" Version="2.0.30" />
@@ -14,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NFC.Application\NFC.Application.csproj" />
+    <ProjectReference Include="..\NFC.Common\NFC.Common.csproj" />
     <ProjectReference Include="..\NFC.Domain\NFC.Domain.csproj" />
   </ItemGroup>
 

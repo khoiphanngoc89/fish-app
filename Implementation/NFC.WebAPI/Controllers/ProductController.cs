@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace NFC.WebAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="NFC.WebAPI.Controllers.AbstractController" />
     [ApiController]
     [Route(ApiConst.RootRoute)]
     public class ProductController : AbstractController
@@ -54,6 +58,10 @@ namespace NFC.WebAPI.Controllers
             return CreatedAtAction(nameof(GetAllProduct), result);
         }
 
+        /// <summary>
+        /// Gets the highlight.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route(ApiConst.Highlight)]
         public async Task<IActionResult> GetHighlight()
@@ -78,8 +86,9 @@ namespace NFC.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Updates the specified request.
+        /// Updates the specified identifier.
         /// </summary>
+        /// <param name="id">The identifier.</param>
         /// <param name="request">The request.</param>
         /// <returns></returns>
         [HttpPut]
@@ -93,9 +102,9 @@ namespace NFC.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Updates the specified request.
+        /// Deletes the specified identifier.
         /// </summary>
-        /// <param name="request">The request.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpPut]
         [Authorize]

@@ -6,8 +6,7 @@ namespace NFC.Domain.Entities
     /// <summary>
     /// Defines the menu.
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int32}" />
-    /// <seealso cref="NFC.Common.Shared.IActiveMetadata" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class Menu : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>
@@ -16,7 +15,15 @@ namespace NFC.Domain.Entities
         /// <value>
         /// The name.
         /// </value>
-        public string Name {get; set; }
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        public string Code { get; set; }
 
         /// <summary>
         /// Gets or sets the URL.
@@ -33,6 +40,14 @@ namespace NFC.Domain.Entities
         /// The image.
         /// </value>
         public string Image { get; set; }
+
+        /// <summary>
+        /// Gets or sets the icon.
+        /// </summary>
+        /// <value>
+        /// The icon.
+        /// </value>
+        public string Icon { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the menu.

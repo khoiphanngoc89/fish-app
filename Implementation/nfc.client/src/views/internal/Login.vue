@@ -86,8 +86,9 @@ export default {
     onLogin() {
       let self = this;
       self.onBusyIndicator();
+      let auth = { email: self.model.email, password: self.model.password }
       self.$store
-        .dispatch(LOGIN, { email: self.model.email, password: self.model.password })
+        .dispatch(LOGIN, auth)
         .then(() => {
           if (!!self.$router.query && !!self.$router.query.redirect) {
             self.$router.query.redirect = ''
@@ -101,7 +102,6 @@ export default {
         .finally(() => {
           self.offBusyIndicator();
         })
-
     }
   }
 }

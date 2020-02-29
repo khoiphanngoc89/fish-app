@@ -3,11 +3,10 @@
 namespace NFC.Domain.Entities
 {
     /// <summary>
-    /// Defines the product.
+    /// 
     /// </summary>
-    /// <seealso cref="NFC.Common.Shared.DomainEntity{System.Int64}" />
-    /// <seealso cref="NFC.Common.Shared.IActiveMetadata" />
-    /// <seealso cref="NFC.Common.Shared.ISeoMetadata" />
+    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
+    /// <seealso cref="NFC.Application.Shared.ISeoMetadata" />
     public class Product : DomainEntity<long>, IActiveMetadata, ISeoMetadata
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using NFC.Domain.Entities;
+﻿using NFC.Application.Shared;
+using NFC.Domain.Entities;
 using NFC.Infrastructure.SharedKernel;
 
 namespace NFC.Infrastructure.Repositories
@@ -6,15 +7,13 @@ namespace NFC.Infrastructure.Repositories
     /// <summary>
     /// Defines the product category repository.
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.IGenericRepository{System.Int64, NFC.Domain.Entities.Product}" />
     public interface IProductCategoryRepository : IGenericRepository<long, Category>
-    { 
+    {
     }
 
     /// <summary>
     /// Provides product repository methods.
     /// </summary>
-    /// <seealso cref="NFC.Infrastructure.SharedKernel.GenericRepositoryBase{System.Int64, NFC.Domain.Entities.Category}" />
     /// <seealso cref="IProductCategoryRepository" />
     public class ProductCategoryRepository : GenericRepositoryBase<long, Category>, IProductCategoryRepository
     {
@@ -22,7 +21,8 @@ namespace NFC.Infrastructure.Repositories
         /// Initializes a new instance of the <see cref="ProductCategoryRepository"/> class.
         /// </summary>
         /// <param name="repository">The data access object.</param>
-        public ProductCategoryRepository(IRepository repository) : base(repository)
+        /// <param name="builder">The builder.</param>
+        public ProductCategoryRepository(IRepository repository, IParamsBuilder builder) : base(repository, builder)
         {
         }
     }

@@ -5,8 +5,6 @@ namespace NFC.Persistence.Contracts
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="NFC.Application.Shared.DomainEntity{System.Int32}" />
-    /// <seealso cref="NFC.Application.Shared.IActiveMetadata" />
     public class SubMenuDto : DomainEntity<int>, IActiveMetadata
     {
         /// <summary>
@@ -31,7 +29,7 @@ namespace NFC.Persistence.Contracts
         /// <value>
         /// The description.
         /// </value>
-        public string Description { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
         /// Gets or sets the url.
@@ -40,6 +38,14 @@ namespace NFC.Persistence.Contracts
         /// The url.
         /// </value>
         public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or sets the icon.
+        /// </summary>
+        /// <value>
+        /// The icon.
+        /// </value>
+        public string Icon { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is active.
