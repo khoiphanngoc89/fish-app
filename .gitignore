@@ -94,10 +94,8 @@ tools/*
 /Command.bat
 *.suo
 /.vs
-/*.user
 /Share/StartTeam/nuget/*.nupkg
 *.nupkg
-*.user
 *.dll
 *StructureConfig*
 *.resourcesConfig
@@ -107,7 +105,7 @@ sonar-project.properties
 *.*.sln.CodeItRight.xml
 *.GhostDoc.user.dic
 /.idea/
-/Implementation/**/NugetAssets/Lib
+/src/**/NugetAssets/Lib
 *.~ml
 *.~nt
 
