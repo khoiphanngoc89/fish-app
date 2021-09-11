@@ -97,6 +97,7 @@ tools/*
 /Share/StartTeam/nuget/*.nupkg
 *.nupkg
 *.dll
+*.csproj.user
 *StructureConfig*
 *.resourcesConfig
 **Test/Configuration/*.*
