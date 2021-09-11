@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fish.Contact.User\Fish.Contact.User.csproj" />
     <ProjectReference Include="..\Fish.Domain\Fish.Domain.csproj" />
   </ItemGroup>
 
