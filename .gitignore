@@ -101,7 +101,6 @@ tools/*
 *.dll
 *StructureConfig*
 *.resourcesConfig
-**/SMEE.NADAE.ModuleLauncher.exe
 **Test/Configuration/*.*
 sonar-project.properties
 .scannerwork
@@ -111,4 +110,4 @@ sonar-project.properties
 /Implementation/**/NugetAssets/Lib
 *.~ml
 *.~nt
-/Implementation/.vscode
+
