@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Fish.Contact.User\Fish.Contact.User.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ShareKernel\" />
+  </ItemGroup>
+
 </Project>
