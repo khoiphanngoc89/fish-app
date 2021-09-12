@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fish.Contact.Common\Fish.Contact.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,8 @@ namespace Fish.Contact.Common
 
         public const string AthenUrl = "http://localhost:33535/";
 
+        public const string ApiUrl = "http://localhost:33514/";
+
         public const string ClientUrl = "http://localhost:3006/";
     }
 }

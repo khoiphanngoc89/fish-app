@@ -9,6 +9,8 @@ namespace Fish.Domain.DbInfoProvider
 {
     public static class Config
     {
+        // client app: http://localhost:3006/
+        //
         public static IEnumerable<Client> Clients => new List<Client>()
         {
             new Client

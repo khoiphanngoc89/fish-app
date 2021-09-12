@@ -25,7 +25,6 @@ namespace Fish.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var identityAuthorityUrl = "http://localhost:33535/";
             services.AddControllers();
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
@@ -42,7 +41,7 @@ namespace Fish.WebApi
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "IdentityServer.Demo.Api",
+                        Title = "Fish.WebApi",
                         Version = "v1",
                     });
                 c.CustomSchemaIds(x => x.FullName);
@@ -85,11 +84,6 @@ namespace Fish.WebApi
                                 .AllowAnyMethod()
                                 .AllowCredentials();
                     });
-            });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fish.WebApi", Version = "v1" });
             });
         }
 
