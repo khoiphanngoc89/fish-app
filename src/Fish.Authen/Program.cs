@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fish.Authentication
+namespace Fish.Authen
 {
     public class Program
     {

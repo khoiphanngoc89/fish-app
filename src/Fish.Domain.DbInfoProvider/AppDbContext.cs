@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Fish.Domain
+namespace Fish.Domain.DbInfoProvider
 {
     public class AppDbContext : IdentityDbContext<AppUser>
     {
@@ -14,5 +14,6 @@ namespace Fish.Domain
         {
             base.OnModelCreating(builder);
         }
+
     }
 }
