@@ -110,3 +110,4 @@ sonar-project.properties
 *.~ml
 *.~nt
 
+Migrations/*
